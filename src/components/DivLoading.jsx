@@ -11,8 +11,8 @@ const DivLoading = (props) => {
             animationPlayState: "running",
             animationDelay: "0s"
         }}
-        width="200px"
-        height="200px"
+        width="75px"
+        height="75px"
         viewBox="0 0 100 100"
         preserveAspectRatio="xMidYMid"
       >

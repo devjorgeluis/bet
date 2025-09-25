@@ -1,20 +1,28 @@
 const CategoryButton = (props) => {
-  let customClass = "slots-provider-filter-list-desktop__item";
+  let customClass = "providers-carousel_providerItem";
   if (props.active == true) {
-    customClass += " slots-provider-filter-list-desktop__item_active";
+    customClass += " providers-carousel_active";
   }
 
   return (
     <div className={customClass} onClick={props.onClick}>
-      {
-        props.icon && props.icon !== "" &&
-        <span className="provider-filter-live-games-desktop__item-icon">
-          <span className="SVGInline SVG-component__content">
-            <img src={props.icon} alt={props.title} />
-          </span>
-        </span>
-      }
-      <span className="provider-filter-live-games-desktop__item-name">{props.title}</span>
+      <div className="providers-carousel_providerItemIcon">
+        {
+          props.icon && props.icon !== "" &&
+          <img
+            alt={props.name}
+            loading="lazy"
+            width="20"
+            height="20"
+            decoding="async"
+            src={props.icon}
+            onError={(e) => {
+              e.target.style.display = 'none';
+            }}
+          />
+        }
+      </div>
+      <span className="providers-carousel_providerItemLabel">{props.name}</span>
     </div>
   );
 };

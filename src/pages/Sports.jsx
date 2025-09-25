@@ -45,33 +45,29 @@ const Sports = () => {
                         <DivLoading />
                     </div>
                 ) : sportsEmbedUrl ? (
-                    <div className="app__main-content">
-                        <div className="digitain-sport-desktop">
-                            <div id="sport_div_iframe">
-                                <iframe
-                                    src={sportsEmbedUrl}
-                                    title="Sportsbook"
-                                    className="sports-iframe"
-                                    allowFullScreen
-                                    loading="lazy"
-                                    onError={(e) => {
-                                        setMessageCustomAlert(["error", "No se pudo cargar el sportsbook. Intente recargar la página."]);
-                                    }}
-                                />
-                            </div>
-                        </div>
+                    <div className="game-iframe-view_gameIframeWrapper game-iframe-view_sportbook">
+                        <iframe
+                            src={sportsEmbedUrl}
+                            title="Sportsbook"
+                            className="game-iframe-view_gameIframe game-iframe-view_sportbook"
+                            allowFullScreen
+                            loading="lazy"
+                            onError={(e) => {
+                                setMessageCustomAlert(["error", "No se pudo cargar el sportsbook. Intente recargar la página."]);
+                            }}
+                        />
                     </div>
                 ) : (
-                    <div className="sports-layout-desktop__content">
-                        <div className="sports-error-container">
-                            <div className="sports-error-message">
-                                <p>No se pudo cargar la página de deportes.</p>
-                                <button
-                                    className="button-desktop button-desktop_color_default"
-                                    onClick={loadSportsPage}
-                                >
-                                    Intentar de nuevo
-                                </button>
+                    <div className="game-iframe-view_gameIframeWrapper game-iframe-view_sportbook">
+                        <div className="no-game">
+                            <div className="leftWrapper">
+                                <p className="forbiddenNumber">
+                                    403
+                                </p>
+                                <p className="forbiddenText">
+                                    Forbidden: Access is denied.
+                                    Sorry, your location is not covered by our service.
+                                </p>
                             </div>
                         </div>
                     </div>

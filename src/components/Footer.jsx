@@ -1,80 +1,119 @@
+import { useState } from "react";
 import ImgLogo from "/src/assets/img/logo.png";
-import ImgBet from "/src/assets/img/bet-responsibility.png";
+import IconFacebook from "/src/assets/svg/facebook.svg";
+import IconInstagram from "/src/assets/svg/instagram.svg";
+import IconTelegram from "/src/assets/svg/telegram.svg";
+import Icon18 from "/src/assets/svg/18.svg";
+import IconGt from "/src/assets/svg/gt-logo-ganaencasa.svg";
 import IconChat from "/src/assets/svg/chat.svg";
+import TermsModal from "./TermsModal";
+import PrivacyModal from "./PrivacyModal";
+import ResponsibleGamingModal from "./ResponsibleGamingModal";
 
 const Footer = () => {
+    const [isTermsModalOpen, setIsTermsModalOpen] = useState(false);
+    const [isPrivacyModalOpen, setIsPrivacyModalOpen] = useState(false);
+    const [isResponsibleGamingModalOpen, setIsResponsibleGamingModalOpen] = useState(false);
+
     return (
-        <div className="app__footer-container">
-            <footer className="footer">
-                <nav className="footer__nav-links">
-                    <div className="footer__menu-container">
-                        <a className="footer__menu-item" href="/">
-                            <span className="footer__menu-description">Inicio</span>
-                        </a>
-                        <a className="footer__menu-item" href="/sports">
-                            <span className="footer__menu-description">Deporte</span>
-                        </a>
+        <>
+            <footer className="footer_footer">
+                <section>
+                    <div className="footer_headerLinksWrapper">
+                        <div className="footer_headerLinks">
+                            <div className="footer_headerLinksInfo">
+                                <a href="/">
+                                    <img alt="" loading="lazy" width="118" height="48" decoding="async"  className="logo_logo" src={ImgLogo} />
+                                </a>
+                                <p>2025 all rights reserved.This site operates under license of Curacao - Netherlands Antilles</p>
+                            </div>
+                            <div className="footer_headerLinksBlock">
+                                <div className="footer_linksItem">
+                                    <span className="footer_linksItemTitle">SECTIONS</span>
+                                    <a href="/">
+                                        <span className="footer-link_footerLink footer-link_active">Home</span>
+                                    </a>
+                                    <a href="/casino">
+                                        <span className="footer-link_footerLink">Casino</span>
+                                    </a>
+                                    <a href="/live-casino">
+                                        <span className="footer-link_footerLink">Live Casino</span>
+                                    </a>
+                                    <a href="/sports">
+                                        <span className="footer-link_footerLink">Sport</span>
+                                    </a>
+                                    <a href="/docs/betting-rules.pdf" target="_blank" rel="noopener noreferrer">
+                                        <span className="footer-link_footerLink">Betting Regulations</span>
+                                    </a>
+                                </div>
+                                <div className="footer_linksItem">
+                                    <span className="footer_linksItemTitle">US</span>
+                                    <a href="#" onClick={(e) => { e.preventDefault(); setIsTermsModalOpen(true); }}>
+                                        <span className="footer-link_footerLink">Terms and conditions</span>
+                                    </a>
+                                    <a href="#" onClick={(e) => { e.preventDefault(); setIsPrivacyModalOpen(true); }}>
+                                        <span className="footer-link_footerLink">Privacy Policy</span>
+                                    </a>
+                                    <a href="#" onClick={(e) => { e.preventDefault(); setIsResponsibleGamingModalOpen(true); }}>
+                                        <span className="footer-link_footerLink">Responsible gaming</span>
+                                    </a>
+                                </div>
+                            </div>
+                            <div className="footer_linksItem">
+                                <span className="footer_linksItemTitle">Follow us on our social networks</span>
+                                <div className="footer_socialLinks">
+                                    <a className="footer-social-link_footerSocialLink" href="/">
+                                        <img src={IconFacebook} />
+                                    </a>
+                                    <a className="footer-social-link_footerSocialLink" href="/">
+                                        <img src={IconInstagram} />
+                                    </a>
+                                    <a className="footer-social-link_footerSocialLink" href="/">
+                                        <img src={IconTelegram} />
+                                    </a>
+                                </div>
+                            </div>
+                        </div>
                     </div>
-                    <div className="footer__menu-container">
-                        <a className="footer__menu-item" href="/casino">
-                            <span className="footer__menu-description">Casino</span>
-                        </a>
-                        <a className="footer__menu-item" href="/casinolive">
-                            <span className="footer__menu-description">Casino en vivo</span>
-                        </a>
+                    <div className="footer_warningWrapper">
+                        <div className="footer_warning">
+                            <div className="footer_warningItem">
+                                <div className="footer_forbiddenAgeBlock">
+                                    <img src={Icon18} />
+                                </div>
+                                <p className="footer_warningInfo">Exclusive site for people over 18</p>
+                            </div>
+                            <div className="footer_warningItem">
+                                <div className="footer_warningIcon">
+                                    <img alt="gt logo" loading="lazy" width="50" height="50" decoding="async" data-nimg="1" src={IconGt} />
+                                </div>
+                                <p className="footer_warningInfo">Please play responsibly. For more information visit: GamblingTherapy.org</p>
+                            </div>
+                        </div>
                     </div>
-                    <div className="footer__menu-container">
-                        <a className="footer__menu-item" href="/sport-rules">
-                            <span className="footer__menu-description"> Reglas deportivas</span>
-                        </a>
-                        <a className="footer__menu-item" href="/ultim8-sport-rules">
-                            <span className="footer__menu-description">Reglas deportivas ULTIM8</span>
-                        </a>
-                        <a className="footer__menu-item" href="/market-description">
-                            <span className="footer__menu-description">Descripción de los mercados</span>
-                        </a>
-                        <a className="footer__menu-item" href="/tipos-de-apuestas">
-                            <span className="footer__menu-description">Tipos de apuestas</span>
-                        </a>
-                    </div>
-                </nav>
-                <div className="footer__center">
-                    <div className="footer__logo">
-                        <img
-                            title="Casino"
-                            alt="Casino"
-                            src={ImgLogo}
-                            className="logo-domain"
-                        />
-                    </div>
-                    <p className="footer__center-desc"></p>
-                </div>
-                <div className="footer__right">
-                    <div className="footer__button">
-                        <div className="scroll-top-button-desktop">
-                            <button
-                                type="button"
-                                className="button-desktop button-desktop_color_transparent"
-                                onClick={() => window.scrollTo({ top: 0, behavior: 'smooth' })}
-                            >
-                                <span className="scroll-top-button-desktop__text">Volver arriba</span>
+                    <div className="chat-with-us app-mode-chat">
+                        <div className="tawk-min-container">
+                            <button type="button" aria-label="Widget de Chat" title="Widget de Chat" className="tawk-custom-color tawk-custom-border-color tawk-outline tawk-button tawk-button-circle tawk-button-large">
+                                <img className="tawk-min-chat-icon" src={IconChat} />
                             </button>
                         </div>
                     </div>
-                    <div className="footer__right-container">
-                        <img className="footer__icon" src={ImgBet} alt="18+" />
-                    </div>
-                </div>
-                <div className="chat-with-us app-mode-chat">
-                    <div className="tawk-min-container">
-                        <span className="tawk-badge tawk-flex tawk-flex-center tawk-flex-middle tawk-min-badge">0</span>
-                        <button type="button" aria-label="Widget de Chat" title="Widget de Chat" className="tawk-custom-color tawk-custom-border-color tawk-outline tawk-button tawk-button-circle tawk-button-large">
-                            <img className="tawk-min-chat-icon" src={IconChat} />
-                        </button>
-                    </div>
-                </div>
+                </section>
             </footer>
-        </div>
+
+            <TermsModal
+                isOpen={isTermsModalOpen}
+                onClose={() => setIsTermsModalOpen(false)}
+            />
+            <PrivacyModal
+                isOpen={isPrivacyModalOpen}
+                onClose={() => setIsPrivacyModalOpen(false)}
+            />
+            <ResponsibleGamingModal
+                isOpen={isResponsibleGamingModalOpen}
+                onClose={() => setIsResponsibleGamingModalOpen(false)}
+            />
+        </>
     );
 };
 

@@ -1,25 +1,21 @@
 import IconClose from "/src/assets/svg/close.svg";
 
-const LogoutConfirmModal = ({ onConfirm, onCancel }) => {
+const LogoutConfirmModal = ({ onConfirm, onClose }) => {
     return (
-        <div className="modal" style={{display: "block"}}>
-            <div className="modal__content-container">
-                <div className="logout-modal-desktop">
-                    <span className="logout-modal-desktop__cross" onClick={onCancel}>
-                        <span className="SVGInline SVG-component__content">
-                            <img src={IconClose} />
-                        </span>
-                    </span>
-                    <h2 className="logout-modal-desktop__title">Cerrar sesión</h2>
-                    <span className="logout-modal-desktop__sub-title">¿Ya te vas? ¿Tan rapido? Te extrañaremos</span>
-                    <div className="logout-modal-desktop__button-group">
-                        <div className="logout-modal-desktop__button-container">
-                            <button type="button" className="button-desktop button-desktop_color_default" onClick={onCancel}>No</button>
-                        </div>
-                        <div className="logout-modal-desktop__button-container">
-                            <button type="button" className="button-desktop button-desktop_color_purple-bordered" onClick={onConfirm}>Sí</button>
-                        </div>
-                    </div>
+        <div className="modal-wrapper_modalWrapper modal-wrapper_shown">
+            <div className="modal-wrapper_modalContentWrapper modal-wrapper_hasTitle logout-modal">
+                <div className="modal-wrapper-title_modalWrapperTitle">
+                    <span>Log out</span>
+                    <button onClick={onClose}>
+                        <img src={IconClose} />
+                    </button>
+                </div>
+                <div className="logout-modal_logoutModalText">Are you sure you want to log out?</div>
+                <div className="modal-footer_modalFooter modal-footer_vertical logout-modal_loginModalFooter">
+                    <button className="button_button button_zeusPrimary button_sm" type="button" onClick={onClose}>Back</button>
+                    <button className="button_button button_zeusPrimary button_sm logout-modal_logoutBtn" type="button" onClick={onConfirm}>
+                        Log out
+                    </button>
                 </div>
             </div>
         </div>

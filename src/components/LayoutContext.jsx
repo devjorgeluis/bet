@@ -5,6 +5,7 @@ export const LayoutContext = createContext({
     userBalance: "",
     handleLoginClick: () => { },
     handleLogoutClick: () => { },
+    handleChangePasswordClick: () => { },
     refreshBalance: () => { },
     setShowFullDivLoading: () => { },
 });

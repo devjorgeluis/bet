@@ -1,9 +1,9 @@
 import { useContext, useState, useEffect } from "react";
 import { ImCross } from "react-icons/im";
 import { ImRedo } from "react-icons/im";
-import { ImEnlarge2 } from "react-icons/im";
-import { ImShrink2 } from "react-icons/im";
 import { ImNewTab } from "react-icons/im";
+import IconEnlarge from "/src/assets/svg/enlarge.svg";
+import IconShrink from "/src/assets/svg/shrink.svg";
 import DivLoading from "./DivLoading";
 
 const GameModal = (props) => {
@@ -16,15 +16,15 @@ const GameModal = (props) => {
     const checkIsMobile = () => {
       return window.innerWidth <= 767;
     };
-    
+
     setIsMobile(checkIsMobile());
-    
+
     const handleResize = () => {
       setIsMobile(checkIsMobile());
     };
-    
+
     window.addEventListener('resize', handleResize);
-    
+
     return () => {
       window.removeEventListener('resize', handleResize);
     };
@@ -36,7 +36,7 @@ const GameModal = (props) => {
         window.location.href = props.gameUrl;
       } else {
         document
-          .getElementsByClassName("game-window")[0]
+          .getElementsByClassName("game-container")[0]
           .classList.remove("d-none");
         setUrl(props.gameUrl);
       }
@@ -45,7 +45,7 @@ const GameModal = (props) => {
 
   const closeModal = () => {
     resetModal();
-    document.getElementsByClassName("game-window")[0].classList.add("d-none");
+    document.getElementsByClassName("game-container")[0].classList.add("d-none");
     if (props.onClose) {
       props.onClose();
     }
@@ -64,7 +64,7 @@ const GameModal = (props) => {
 
   const toggleFullScreen = () => {
     const gameWindow = document.getElementsByClassName("game-window")[0];
-    
+
     if (!isFullscreen) {
       // Enter fullscreen
       if (gameWindow.requestFullscreen) {
@@ -101,7 +101,7 @@ const GameModal = (props) => {
     ) {
       setIsFullscreen(false);
       document
-        .getElementsByClassName("game-window")[0]
+        .getElementsByClassName("game-container")[0]
         .classList.remove("fullscreen");
     }
   };
@@ -170,67 +170,76 @@ const GameModal = (props) => {
 
   return (
     <>
-      <div className="d-none game-window">
-        <div className="game-window-header">
-          <div className="game-window-header-item align-center close-window">
-            <span className="close-button" onClick={closeModal} title="Close">
-              <ImCross />
-            </span>
+      <div className="d-none game-container">
+        {
+          !isFullscreen && <div className="games-block-title_gamesBlockTitle">
+            <div className="games-block-title_gamesBlockTitleSeparator games-block-title_gamesBlockTitleLeft"></div>
+            <p className="games-block-title_gamesBlockTitleText">Joker's Jewels</p>
+            <div className="games-block-title_gamesBlockTitleSeparator games-block-title_gamesBlockTitleRight"></div>
           </div>
-          <div className="game-window-header-item align-center reload-window">
-            <span className="icon-reload" onClick={reload} title="Reload">
-              <ImRedo />
-            </span>
-          </div>
-          <div className="game-window-header-item align-center full-window">
-            {isFullscreen ? (
-              <span
-                className="icon-originscreen"
-                onClick={toggleFullScreen}
-                title="Exit Fullscreen"
-              >
-                <ImShrink2 />
+        }
+        <div className="game-window">
+          <div className="game-window-header">
+            <div className="game-window-header-item align-center close-window">
+              <span className="close-button" onClick={closeModal} title="Close">
+                <ImCross />
               </span>
-            ) : (
-              <span
-                className="icon-fullscreen"
-                onClick={toggleFullScreen}
-                title="Fullscreen"
-              >
-                <ImEnlarge2 />
+            </div>
+            <div className="game-window-header-item align-center reload-window">
+              <span className="icon-reload" onClick={reload} title="Reload">
+                <ImRedo />
               </span>
-            )}
+            </div>
+            <div className="game-window-header-item align-center full-window">
+              {isFullscreen ? (
+                <span
+                  className="icon-originscreen"
+                  onClick={toggleFullScreen}
+                  title="Exit Fullscreen"
+                >
+                  <img src={IconShrink} />
+                </span>
+              ) : (
+                <span
+                  className="icon-fullscreen"
+                  onClick={toggleFullScreen}
+                  title="Fullscreen"
+                >
+                  <img src={IconEnlarge} />
+                </span>
+              )}
+            </div>
+            <div className="game-window-header-item align-center new-window">
+              <span
+                className="icon-new-window"
+                onClick={launchInNewTab}
+                title="Open In New Window"
+              >
+                <ImNewTab />
+              </span>
+            </div>
           </div>
-          <div className="game-window-header-item align-center new-window">
-            <span
-              className="icon-new-window"
-              onClick={launchInNewTab}
-              title="Open In New Window"
+
+          {iframeLoaded == false && (
+            <div
+              id="game-window-loading"
+              className="game-window-iframe-wrapper"
             >
-              <ImNewTab />
-            </span>
-          </div>
-        </div>
+              <DivLoading />
+            </div>
+          )}
 
-        {iframeLoaded == false && (
           <div
-            id="game-window-loading"
-            className="game-window-iframe-wrapper"
+            id="game-window-iframe"
+            className="game-window-iframe-wrapper d-none"
           >
-            <DivLoading />
+            <iframe
+              allow="camera;microphone;fullscreen *"
+              src={url}
+              onLoad={handleIframeLoad}
+              onError={handleIframeError}
+            ></iframe>
           </div>
-        )}
-
-        <div
-          id="game-window-iframe"
-          className="game-window-iframe-wrapper d-none"
-        >
-          <iframe
-            allow="camera;microphone;fullscreen *"
-            src={url}
-            onLoad={handleIframeLoad}
-            onError={handleIframeError}
-          ></iframe>
         </div>
       </div>
     </>

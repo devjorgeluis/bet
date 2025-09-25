@@ -59,7 +59,7 @@ const Login = () => {
                     <span className="SVGInline sign-in-mobile__arrow" onClick={() => navigate("/home")}>
                         <img className="SVGInline-svg sign-in-mobile__arrow-svg" src={IconChevronLeft} alt="Back arrow" />
                     </span>
-                    <span className="sign-in-mobile__back-text">Acceder</span>
+                    <span className="sign-in-mobile__back-text">Login</span>
                 </div>
                 <div className="sign-in-mobile__form">
                     <div className="sign-in-mobile__fields">
@@ -126,7 +126,7 @@ const Login = () => {
                             className={`button-mobile button-mobile_color_default button-mobile_borderRadius_500 ${isButtonEnabled ? "" : "button-mobile_disabled"}`}
                             disabled={!isButtonEnabled}
                         >
-                            <span className="sign-in-mobile__button-text">Acceder</span>
+                            <span className="sign-in-mobile__button-text">Login</span>
                         </button>
                     </div>
                 </div>

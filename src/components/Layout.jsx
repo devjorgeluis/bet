@@ -6,14 +6,11 @@ import { LayoutContext } from "./LayoutContext";
 import { callApi } from "../utils/Utils";
 import Header from "./Header";
 import Footer from "./Footer";
-import MobileHeader from "./MobileHeader";
-import MobileFooter from "./MobileFooter";
 import NavLinkHeader from "../components/NavLinkHeader";
 import LoginModal from "./LoginModal";
 import LogoutConfirmModal from "./LogoutConfirmModal";
-import FullDivLoading from "./FullDivLoading";
+import ChangePasswordModal from "./ChangePasswordModal";
 import { NavigationContext } from "./NavigationContext";
-import VerifyAgeModal from "../components/VerifyAgeModal";
 
 const Layout = () => {
     const { contextData } = useContext(AppContext);
@@ -23,10 +20,8 @@ const Layout = () => {
     const [userBalance, setUserBalance] = useState("");
     const [showLoginModal, setShowLoginModal] = useState(false);
     const [showLogoutModal, setShowLogoutModal] = useState(false);
+    const [showChangePasswordModal, setShowChangePasswordModal] = useState(false);
     const [fragmentNavLinksTop, setFragmentNavLinksTop] = useState(<></>);
-    const [isSidebarOpen, setIsSidebarOpen] = useState(false);
-    const [showFullDivLoading, setShowFullDivLoading] = useState(false);
-    const [showAgeModal, setShowAgeModal] = useState(false);
     const [isSlotsOnly, setIsSlotsOnly] = useState("");
     const navigate = useNavigate();
 
@@ -40,13 +35,6 @@ const Layout = () => {
             getStatus();
         }
     }, [contextData.session]);
-
-    useEffect(() => {
-        const isAgeVerified = localStorage.getItem("is-age-verified");
-        if (!isAgeVerified) {
-            setShowAgeModal(true);
-        }
-    });
 
     useEffect(() => {
         const checkIsMobile = () => {
@@ -68,29 +56,25 @@ const Layout = () => {
 
     const refreshBalance = () => {
         setUserBalance("");
-        setShowFullDivLoading(true);
         callApi(contextData, "GET", "/get-user-balance", callbackRefreshBalance, null);
     };
 
     const callbackRefreshBalance = (result) => {
         setUserBalance(result && result.balance);
-        setShowFullDivLoading(false);
     };
 
     const getStatus = () => {
-        setShowFullDivLoading(true);
         callApi(contextData, "GET", "/get-status", callbackGetStatus, null);
     };
 
     const getPage = (page) => {
         setSelectedPage(page);
-        setShowFullDivLoading(true);
         callApi(contextData, "GET", "/get-page?page=" + page, callbackGetPage, null);
         navigate("/" + (page === "home" ? "" : page));
     };
 
-    const callbackGetPage = (result) => {
-        setShowFullDivLoading(false);
+    const callbackGetPage = () => {
+
     };
 
     const callbackGetStatus = (result) => {
@@ -99,13 +83,8 @@ const Layout = () => {
             setFragmentNavLinksTop(
                 <>
                     <NavLinkHeader
-                        title="Inicio"
+                        title="Home"
                         pageCode="home"
-                        icon=""
-                    />
-                    <NavLinkHeader
-                        title="Deporte"
-                        pageCode="sports"
                         icon=""
                     />
                     <NavLinkHeader
@@ -114,8 +93,13 @@ const Layout = () => {
                         icon=""
                     />
                     <NavLinkHeader
-                        title="Casino en vivo"
-                        pageCode="casinolive"
+                        title="Live Casino"
+                        pageCode="live-casino"
+                        icon=""
+                    />
+                    <NavLinkHeader
+                        title="Sport"
+                        pageCode="sports"
                         icon=""
                     />
                 </>
@@ -125,7 +109,7 @@ const Layout = () => {
             setFragmentNavLinksTop(
                 <>
                     <NavLinkHeader
-                        title="Inicio"
+                        title="Home"
                         pageCode="home"
                         icon=""
                     />
@@ -149,12 +133,12 @@ const Layout = () => {
         setShowLoginModal(false);
     };
 
-    const goLoginPage = () => {
-        navigate("/login");
-    }
-
     const handleLogoutClick = () => {
         setShowLogoutModal(true);
+    };
+
+    const handleChangePasswordClick = () => {
+        setShowChangePasswordModal(true);
     };
 
     const handleLogoutConfirm = () => {
@@ -170,12 +154,8 @@ const Layout = () => {
         }, null);
     };
 
-    const handleLogoutCancel = () => {
+    const handleChangePasswordConfirm = () => {
         setShowLogoutModal(false);
-    };
-
-    const toggleSidebar = () => {
-        setIsSidebarOpen(!isSidebarOpen);
     };
 
     const layoutContextValue = {
@@ -183,30 +163,16 @@ const Layout = () => {
         userBalance,
         handleLoginClick,
         handleLogoutClick,
-        refreshBalance,
-        setShowFullDivLoading,
-    };
-
-    const handleAgeVerifyConfirm = () => {
-        localStorage.setItem("is-age-verified", JSON.stringify({ value: true }));
-        setShowAgeModal(false);
+        handleChangePasswordClick,
+        refreshBalance
     };
 
     return (
         <LayoutContext.Provider value={layoutContextValue}>
             <NavigationContext.Provider
-                value={{ fragmentNavLinksTop, selectedPage, setSelectedPage, getPage, showFullDivLoading, setShowFullDivLoading }}
+                value={{ fragmentNavLinksTop, selectedPage, setSelectedPage, getPage }}
             >
-                <VerifyAgeModal
-                    isOpen={showAgeModal}
-                    onClose={() => setShowAgeModal(false)}
-                    onConfirm={handleAgeVerifyConfirm}
-                />
-                <div className="body-container fade-in">
-                    <FullDivLoading show={showFullDivLoading} />
-                    {showLogoutModal && (
-                        <LogoutConfirmModal onConfirm={handleLogoutConfirm} onCancel={handleLogoutCancel} />
-                    )}
+                <>
                     {showLoginModal && (
                         <LoginModal
                             isOpen={showLoginModal}
@@ -214,37 +180,37 @@ const Layout = () => {
                             onConfirm={handleLoginConfirm}
                         />
                     )}
-                    <div className="body-scrollable">
-                        <div className="app__header-wrapper">
-                            <Header
-                                isLogin={isLogin}
-                                userBalance={userBalance}
-                                handleLoginClick={handleLoginClick}
-                                handleLogoutClick={handleLogoutClick}
-                                fragmentNavLinksTop={fragmentNavLinksTop}
-                                isSlotsOnly={isSlotsOnly}
-                            />
-                            <MobileHeader
-                                isLogin={isLogin}
-                                userBalance={userBalance}
-                                isOpen={isSidebarOpen}
-                                handleLoginClick={goLoginPage}
-                                onToggle={toggleSidebar}
-                                isSlotsOnly={isSlotsOnly}
-                            />
-                            <main className="app__main">
-                                <Outlet />
-                            </main>
-                            {
-                                isMobile && !isSportsPage ? <Footer isSportsPage={isSportsPage} /> :
+                    {showLogoutModal && (
+                        <LogoutConfirmModal 
+                            onConfirm={handleLogoutConfirm}
+                            onClose={() => setShowLogoutModal(false)}
+                        />
+                    )}
+                    {showChangePasswordModal && (
+                        <ChangePasswordModal 
+                            onConfirm={handleChangePasswordConfirm} 
+                            onClose={() => setShowChangePasswordModal(false)}
+                        />
+                    )}
+                    <>
+                        <Header
+                            isLogin={isLogin}
+                            userBalance={userBalance}
+                            handleLoginClick={handleLoginClick}
+                            handleLogoutClick={handleLogoutClick}
+                            handleChangePasswordClick={handleChangePasswordClick}
+                            fragmentNavLinksTop={fragmentNavLinksTop}
+                            isSlotsOnly={isSlotsOnly}
+                        />
+                        <main className="app__main">
+                            <Outlet />
+                        </main>
+                        {
+                            isMobile && !isSportsPage ? <Footer isSportsPage={isSportsPage} /> :
                                 !isMobile ? <Footer isSportsPage={isSportsPage} /> : <></>
-                            }
-                            {
-                                !isSportsPage && <MobileFooter isSlotsOnly={isSlotsOnly} />
-                            }
-                        </div>
-                    </div>
-                </div>
+                        }
+                    </>
+                </>
             </NavigationContext.Provider>
         </LayoutContext.Provider>
     );

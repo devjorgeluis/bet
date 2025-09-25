@@ -1,16 +1,16 @@
 const NavLinkIcon = (props) => {
-  let customClass = "slots-layout-content-menu__item";
+  let customClass = "games-tags_gamesTag";
   if (props.active) {
-    customClass += " slots-layout-content-menu__item_active";
+    customClass += " games-tags_active";
   }
 
   return (
-    <div className={customClass} onClick={props.onClick}>
-      <span className="slots-layout-content-menu__item-icon">
-        <img src={props.icon} alt={props.title} />
+    <button role="button" className={customClass} onClick={props.onClick}>
+      <span className="games-tags_tagIconWrapper">
+        <img src={props.icon} alt={props.title} width="46" height="40" />
       </span>
-      <span className="slots-layout-content-menu__item-text">{props.title}</span>
-    </div>
+      <span className="games-tags_gameTagLabel">{props.title}</span>
+    </button>
   );
 };
 

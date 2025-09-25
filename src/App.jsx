@@ -3,10 +3,6 @@ import { BrowserRouter as Router } from "react-router-dom";
 import { AppContext } from "./AppContext";
 import ErrorBoundary from "./ErrorBoundary";
 import AppRoutes from "./Routes";
-import "./css/Casino.css";
-import "./css/App.css";
-import "bootstrap/dist/css/bootstrap.css";
-import "bootstrap/dist/css/bootstrap-grid.css";
 import "animate.css";
 
 function App() {

@@ -2,7 +2,7 @@ import { useContext, useState, useEffect } from "react";
 import { AppContext } from "../AppContext";
 import { callApi } from "../utils/Utils";
 import CustomAlert from "../components/CustomAlert";
-import ImgBackground from "/src/assets/img/auth-background.png";
+import ImgLogo from "/src/assets/img/logo.png";
 import IconClose from "/src/assets/svg/close.svg";
 import IconEye from "/src/assets/svg/eye.svg";
 import IconEyeSlash from "/src/assets/svg/eye-slash.svg";
@@ -54,80 +54,90 @@ const LoginModal = ({ isOpen, onClose }) => {
 
     return (
         <>
-            <div className="modal" style={{ display: isOpen ? "block" : "none" }}>
-                <div className="modal__content-container">
-                    <div className="sign-in-desktop">
-                        <div className="sign-in-desktop__background">
-                            <img className="sign-in-desktop__background" src={ImgBackground} alt="background" />
-                        </div>
+            <div className="modal-wrapper_modalWrapper modal-wrapper_shown">
+                <div className="modal-wrapper_modalContentWrapper modal-wrapper_hasTitle login-modal">
+                    <div className="modal-wrapper-title_modalWrapperTitle">
+                        <span>Login</span>
+                        <button onClick={onClose}>
+                            <img src={IconClose} />
+                        </button>
+                    </div>
 
-                        <form method="POST" className="sign-in-desktop__form" onSubmit={handleSubmit}>
-                            <span className="sign-in-desktop__cross" onClick={onClose}>
-                                <span className="SVGInline SVG-component__content">
-                                    <img src={IconClose} className="SVGInline-svg SVG-component__content-svg" />
-                                </span>
-                            </span>
-                            <span className="sign-in-desktop__title">Autorización</span>
-                            <div className="sign-in-desktop__fields">
-                                <span className="sign-in-desktop__label">Nombre<span className="sign-in-desktop__star"> *</span></span>
-                                <div className="sign-in-desktop__input">
-                                    <div className="input-desktop">
-                                        <input
-                                            className="input-desktop__native input-desktop__native_color_default input-desktop__native_type_text"
-                                            type="text"
-                                            name="username"
-                                            placeholder="Nombre"
-                                            autoComplete="false"
-                                            value={username}
-                                            onChange={(e) => setUsername(e.target.value)}
-                                            required
-                                        />
-                                    </div>
-                                </div>
-                                <span className="sign-in-desktop__label">Contraseña<span className="sign-in-desktop__star"> *</span></span>
-                                <div className="sign-in-desktop__input">
-                                    <div className="input-desktop">
-                                        <input
-                                            id="password"
-                                            className="input-desktop__native input-desktop__native_color_default input-desktop__native_type_password"
-                                            type={showPassword ? "text" : "password"}
-                                            name="password"
-                                            placeholder="Contraseña"
-                                            autoComplete="false"
-                                            value={password}
-                                            onChange={(e) => setPassword(e.target.value)}
-                                            required
-                                        />
-                                        {showPassword === false ? (
-                                            <span
-                                                className={`SVGInline input-desktop__password ${showPassword === false ? "input-desktop__password_active" : ""}`}
-                                                onClick={() => setShowPassword(true)}
-                                            >
-                                                <img
-                                                    src={IconEye}
-                                                    className="SVGInline-svg input-desktop__password-svg input-desktop__password_active-svg"
+                    <div className="login-modal_loginModalInner">
+                        <div className="login-modal_logoCentered">
+                            <img alt="" loading="lazy" width="118" height="48" className="logo_logo" src={ImgLogo} />
+                        </div>
+                        <div className="login-modal_modalDescription">
+                            <p className="login-modal_modalDescriptionInner">Enter your username and password to start playing</p>
+                        </div>
+                        <div>
+                            <form className="login-form_loginFormForm" method="POST" onSubmit={handleSubmit}>
+                                <div className="input-wrapper_inputWrapper input-wrapper_default">
+                                    <div>
+                                        <label for="username" className="input-wrapper_inputWrapperLabel">
+                                            <span className="input-wrapper_inputWrapperInput">
+                                                <input
+                                                    className="input_input login-form_loginFormInput"
+                                                    type="text"
+                                                    name="username"
+                                                    placeholder="Nombre"
+                                                    autoComplete="false"
+                                                    value={username}
+                                                    onChange={(e) => setUsername(e.target.value)}
+                                                    required
                                                 />
                                             </span>
-                                        ) : (
-                                            <span
-                                                className="SVGInline input-desktop__password input-desktop__password_active"
-                                                onClick={() => setShowPassword(false)}
-                                            >
-                                                <img
-                                                    src={IconEyeSlash}
-                                                    className="SVGInline-svg input-desktop__password-svg"
+                                        </label>
+                                    </div>
+                                    <fieldset className="input-wrapper_inputWrapperFieldset"></fieldset>
+                                </div>
+                                
+                                <div className="input-wrapper_inputWrapper input-wrapper_default">
+                                    <div>
+                                        <label for="password" className="input-wrapper_inputWrapperLabel">
+                                            <span className="input-wrapper_inputWrapperInput">
+                                                <input
+                                                    id="password"
+                                                    className="input_input login-form_loginFormInput"
+                                                    type={showPassword ? "text" : "password"}
+                                                    name="password"
+                                                    placeholder="Contraseña"
+                                                    autoComplete="false"
+                                                    value={password}
+                                                    onChange={(e) => setPassword(e.target.value)}
+                                                    required
                                                 />
                                             </span>
-                                        )}
+                                            {showPassword === false ? (
+                                                <span
+                                                    className="input-wrapper-suffix_inputWrapperSuffix"
+                                                    onClick={() => setShowPassword(true)}
+                                                >
+                                                    <button type="button" className="input-button_inputButton">
+                                                        <img src={IconEyeSlash} />
+                                                    </button>
+                                                </span>
+                                            ) : (
+                                                <span
+                                                    className="input-wrapper-suffix_inputWrapperSuffix"
+                                                    onClick={() => setShowPassword(false)}
+                                                >
+                                                    <button type="button" className="input-button_inputButton">
+                                                        <img src={IconEye} />
+                                                    </button>
+                                                </span>
+                                            )}
+                                        </label>
                                     </div>
+                                    <fieldset className="input-wrapper_inputWrapperFieldset"></fieldset>
                                 </div>
-                            </div>
-                            <div className="sign-in-desktop__button">
-                                <button type="submit" className="button-desktop button-desktop_color_default">
-                                    <span className="sign-in-desktop__button-text">Acceder</span>
+                                <button className="button_button button_zeusPrimary button_sm login-form_loginFormButton" type="submit">Login
+                                    <span className="button_buttonLoader">
+                                        <svg width="1em" height="1em" fill="currentColor" aria-hidden="true" data-icon="loading" viewBox="0 0 1024 1024"><path d="M988 548c-19.9 0-36-16.1-36-36 0-59.4-11.6-117-34.6-171.3a440.5 440.5 0 0 0-94.3-139.9 437.7 437.7 0 0 0-139.9-94.3C629 83.6 571.4 72 512 72c-19.9 0-36-16.1-36-36s16.1-36 36-36c69.1 0 136.2 13.5 199.3 40.3C772.3 66 827 103 874 150s83.9 101.8 109.7 162.7c26.7 63.1 40.2 130.2 40.2 199.3.1 19.9-16 36-35.9 36"></path></svg>
+                                    </span>
                                 </button>
-                            </div>
-                        </form>
+                            </form>
+                        </div>
                     </div>
                 </div>
             </div>

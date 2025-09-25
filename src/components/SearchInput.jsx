@@ -1,4 +1,3 @@
-import React, { useRef } from "react";
 import IconSearch from "/src/assets/svg/search.svg";
 
 const SearchInput = ({
@@ -8,33 +7,38 @@ const SearchInput = ({
     search
 }) => {
     return (
-        <div className="slots-main-desktop__search-filter">
-            <form className="search-filter-slots-desktop">
-                <div className="search-filter-slots-desktop__input-wrapper">
-                    <span className="SVGInline search-filter-slots-desktop__search-icon">
-                        <img src={IconSearch} className="SVGInline-svg search-filter-slots-desktop__search-icon-svg" />
+        <div className="input-wrapper_inputWrapper slots-filters_searchSectionGamesInput input-wrapper_default">
+            <div>
+                <label className="input-wrapper_inputWrapperLabel">
+                    <span className="input-wrapper-prefix_inputWrapperPrefix">
+                        <img src={IconSearch} />
                     </span>
-                    <div className="search-filter-slots-desktop__input">
-                        <div className="input-desktop">
-                            <input
-                                ref={searchRef}
-                                className="input-desktop__native input-desktop__native_color_default input-desktop__native_type_search-slots"
-                                type="text"
-                                name="slots-search"
-                                placeholder="Búsqueda"
-                                onChange={(event) => {
-                                    setTxtSearch(event.target.value);
-                                }}
-                                onKeyUp={search}
-                                value={txtSearch}
-                            />
-                        </div>
-                    </div>
-                </div>
-                <div className="search-filter-slots-mobile__button">
-                    <button type="submit" className="button-mobile button-mobile_color_default button-mobile_borderRadius_500">Búsqueda</button>
-                </div>
-            </form>
+                    <span className="input-wrapper_inputWrapperInput">
+                        <input
+                            ref={searchRef}
+                            className="input_input"
+                            type="text"
+                            name="slots-search"
+                            placeholder="Search games (minimum 3 characters)"
+                            onChange={(event) => {
+                                setTxtSearch(event.target.value);
+                            }}
+                            onKeyUp={(event) => {
+                                if (event.target.value.length > 2) {
+                                    search(event);
+                                }
+                            }}
+                            value={txtSearch}
+                        />
+                        <span className="input-wrapper-label_inputWrapperLabel input-wrapper_inputWrapperLabelText">
+                            <span>Search games (minimum 3 characters)</span>
+                        </span>
+                    </span>
+                </label>
+            </div>
+            <fieldset className="input-wrapper_inputWrapperFieldset input-wrapper_hasLabel">
+                <legend className="input-wrapper_inputWrapperLegend"><span>Search games (minimum 3 characters)</span></legend>
+            </fieldset>
         </div>
     );
 };

@@ -4,7 +4,5 @@ export const NavigationContext = createContext({
     fragmentNavLinksTop: <></>,
     selectedPage: "",
     setSelectedPage: () => { },
-    getPage: () => { },
-    showFullDivLoading: false,
-    setShowFullDivLoading: () => { },
+    getPage: () => { }
 });
