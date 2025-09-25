@@ -3817,6 +3817,23 @@
     width: 100%;
 }
 
+.check-box-desktop {
+    position: relative;
+    display: inline-block;
+    width: 20px;
+    height: 20px;
+    cursor: pointer;
+}
+
+.check-box-desktop__input {
+    opacity: 0;
+    position: absolute;
+    width: 100%;
+    height: 100%;
+    cursor: pointer;
+    z-index: 1;
+}
+
 .check-box-desktop__checkmark {
     position: absolute;
     top: 0;
