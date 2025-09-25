@@ -14,6 +14,25 @@ const ProfileHistory = () => {
     const navigate = useNavigate();
     const location = useLocation();
     const { contextData } = useContext(AppContext);
+    const [isMobile, setIsMobile] = useState(false);
+
+    useEffect(() => {
+        const checkIsMobile = () => {
+            return window.innerWidth <= 767;
+        };
+
+        setIsMobile(checkIsMobile());
+
+        const handleResize = () => {
+            setIsMobile(checkIsMobile());
+        };
+
+        window.addEventListener('resize', handleResize);
+
+        return () => {
+            window.removeEventListener('resize', handleResize);
+        };
+    }, []);
 
     const getDefaultDates = () => {
         const now = new Date();
@@ -154,7 +173,7 @@ const ProfileHistory = () => {
 
     useEffect(() => {
         window.scrollTo(0, 0);
-    }, [location.pathname]);    
+    }, [location.pathname]);
 
     useEffect(() => {
         fetchHistory(activeTab);
@@ -252,9 +271,11 @@ const ProfileHistory = () => {
                             <div className="pagination_pagination">
                                 {pagination.currentPage > 1 && (
                                     <>
-                                        <button className="pagination_paginationButton" onClick={handleFirstPage}>
-                                            <img src={IconDoubleLeft} alt="first" width={12} />
-                                        </button>
+                                        {
+                                            !isMobile && <button className="pagination_paginationButton" onClick={handleFirstPage}>
+                                                <img src={IconDoubleLeft} alt="first" width={12} />
+                                            </button>
+                                        }
                                         <button className="pagination_paginationButton" onClick={handlePrevPage}>
                                             <img src={IconChevronLeft} alt="next" width={20} />
                                         </button>
@@ -276,9 +297,11 @@ const ProfileHistory = () => {
                                         <button className="pagination_paginationButton" onClick={handleNextPage}>
                                             <img src={IconChevronRight} alt="first" width={12} />
                                         </button>
-                                        <button className="pagination_paginationButton" onClick={handleLastPage}>
-                                            <img src={IconDoubleRight} alt="next" width={12} />
-                                        </button>
+                                        {
+                                            !isMobile && <button className="pagination_paginationButton" onClick={handleLastPage}>
+                                                <img src={IconDoubleRight} alt="next" width={12} />
+                                            </button>
+                                        }
                                     </>
                                 )}
                             </div>
