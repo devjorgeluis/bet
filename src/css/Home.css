@@ -1325,6 +1325,13 @@
     transition: transform .15s ease-in
 }
 
+@media (max-width: 768px) {
+    .game-card_gameCardImage {
+        width: 100%;
+        height: 100%;
+    }
+}
+
 .game-card_gameCard.game-card_md,
 .game-card_gameCard.game-card_sm {
     aspect-ratio: 1/1

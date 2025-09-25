@@ -206,8 +206,8 @@ const Layout = () => {
                             <Outlet />
                         </main>
                         {
-                            isMobile && !isSportsPage ? <Footer isSportsPage={isSportsPage} /> :
-                                !isMobile ? <Footer isSportsPage={isSportsPage} /> : <></>
+                            isMobile && !isSportsPage ? <Footer isSlotsOnly={isSlotsOnly} isSportsPage={isSportsPage} /> :
+                                !isMobile ? <Footer isSlotsOnly={isSlotsOnly} isSportsPage={isSportsPage} /> : <></>
                         }
                     </>
                 </>

@@ -1,4 +1,5 @@
 import { useState } from "react";
+import { useLocation } from "react-router-dom";
 import ImgLogo from "/src/assets/img/logo.png";
 import IconFacebook from "/src/assets/svg/facebook.svg";
 import IconInstagram from "/src/assets/svg/instagram.svg";
@@ -10,7 +11,8 @@ import TermsModal from "./TermsModal";
 import PrivacyModal from "./PrivacyModal";
 import ResponsibleGamingModal from "./ResponsibleGamingModal";
 
-const Footer = () => {
+const Footer = ({ isSlotsOnly }) => {
+    const location = useLocation();
     const [isTermsModalOpen, setIsTermsModalOpen] = useState(false);
     const [isPrivacyModalOpen, setIsPrivacyModalOpen] = useState(false);
     const [isResponsibleGamingModalOpen, setIsResponsibleGamingModalOpen] = useState(false);
@@ -31,17 +33,21 @@ const Footer = () => {
                                 <div className="footer_linksItem">
                                     <span className="footer_linksItemTitle">SECTIONS</span>
                                     <a href="/">
-                                        <span className="footer-link_footerLink footer-link_active">Home</span>
+                                        <span className={`footer-link_footerLink ${location.pathname === '/' ? 'footer-link_active' : ''}`}>Home</span>
                                     </a>
                                     <a href="/casino">
-                                        <span className="footer-link_footerLink">Casino</span>
+                                        <span className={`footer-link_footerLink ${location.pathname === '/casino' ? 'footer-link_active' : ''}`}>Casino</span>
                                     </a>
-                                    <a href="/live-casino">
-                                        <span className="footer-link_footerLink">Live Casino</span>
-                                    </a>
-                                    <a href="/sports">
-                                        <span className="footer-link_footerLink">Sport</span>
-                                    </a>
+                                    {
+                                        isSlotsOnly === "false" && <>
+                                            <a href="/live-casino">
+                                                <span className={`footer-link_footerLink ${location.pathname === '/live-casino' ? 'footer-link_active' : ''}`}>Live Casino</span>
+                                            </a>
+                                            <a href="/sports">
+                                                <span className={`footer-link_footerLink ${location.pathname === '/sports' ? 'footer-link_active' : ''}`}>Sport</span>
+                                            </a>
+                                        </>
+                                    }
                                     <a href="/docs/betting-rules.pdf" target="_blank" rel="noopener noreferrer">
                                         <span className="footer-link_footerLink">Betting Regulations</span>
                                     </a>
