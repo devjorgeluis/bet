@@ -2,6 +2,7 @@ import { useContext, useState, useEffect, useRef } from "react";
 import { useNavigate, useLocation } from "react-router-dom";
 import { AppContext } from "../AppContext";
 import { LayoutContext } from "../components/LayoutContext";
+import { NavigationContext } from "../components/NavigationContext";
 import { callApi, callApiService } from "../utils/Utils";
 import GameCard from "/src/components/GameCard";
 import NavLinkIcon from "../components/NavLinkIcon";
@@ -38,6 +39,7 @@ const Home = () => {
   const pageTitle = "Home";
   const { contextData } = useContext(AppContext);
   const { isLogin } = useContext(LayoutContext);
+  const { setShowFullDivLoading } = useContext(NavigationContext);
   const [selectedPage, setSelectedPage] = useState("lobby");
   const [selectedCategoryIndex, setSelectedCategoryIndex] = useState(0);
   const [games, setGames] = useState([]);
@@ -286,6 +288,7 @@ const Home = () => {
 
   const launchGame = (id, type, launcher) => {
     setShouldShowGameModal(true);
+    setShowFullDivLoading(true);
     selectedGameId = id != null ? id : selectedGameId;
     selectedGameType = type != null ? type : selectedGameType;
     selectedGameLauncher = launcher != null ? launcher : selectedGameLauncher;
@@ -293,6 +296,7 @@ const Home = () => {
   };
 
   const callbackLaunchGame = (result) => {
+    setShowFullDivLoading(false);
     if (result.status == "0") {
       switch (selectedGameLauncher) {
         case "modal":
