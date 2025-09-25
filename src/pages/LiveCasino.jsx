@@ -419,9 +419,7 @@ const LiveCasino = () => {
                         onClick={() =>
                           isLogin
                             ? launchGame(item.id, "slot", "tab")
-                            : isMobile
-                              ? navigate("/login")
-                              : handleLoginClick()
+                            : handleLoginClick()
                         }
                       />
                     );

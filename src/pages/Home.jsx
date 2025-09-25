@@ -386,9 +386,7 @@ const Home = () => {
                         onClick={() =>
                           isLogin
                             ? launchGame(item.id, "slot", "tab")
-                            : isMobile
-                              ? navigate("/login")
-                              : handleLoginClick()
+                            : handleLoginClick()
                         }
                       />
                     );
@@ -426,9 +424,7 @@ const Home = () => {
                         onClick={() =>
                           isLogin
                             ? launchGame(item.id, "slot", "tab")
-                            : isMobile
-                              ? navigate("/login")
-                              : handleLoginClick()
+                            : handleLoginClick()
                         }
                       />
                     );

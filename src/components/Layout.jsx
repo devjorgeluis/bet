@@ -32,8 +32,8 @@ const Layout = () => {
         if (contextData.session != null) {
             setIsLogin(true);
             refreshBalance();
-            getStatus();
         }
+        getStatus();
     }, [contextData.session]);
 
     useEffect(() => {

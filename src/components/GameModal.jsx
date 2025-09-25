@@ -220,6 +220,8 @@ const GameModal = (props) => {
             </div>
           </div>
 
+          {iframeLoaded}
+
           {iframeLoaded == false && (
             <div
               id="game-window-loading"

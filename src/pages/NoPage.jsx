@@ -1,5 +1,7 @@
+import Img404 from "/src/assets/img/404.png";
+
 const NoPage = () => {
-    return <h1>404</h1>;
-  };
-  
-  export default NoPage;
+  return <img src={Img404} className="w-100" />;
+};
+
+export default NoPage;
