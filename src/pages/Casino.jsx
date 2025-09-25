@@ -86,7 +86,6 @@ const Casino = () => {
 
     setSelectedPage("casino");
     getPage("casino");
-    getStatus();
 
     window.scrollTo(0, 0);
   }, [location.pathname]);
@@ -95,10 +94,6 @@ const Casino = () => {
   useEffect(() => {
     updateNavLinks();
   }, [selectedPage]);
-
-  const getStatus = () => {
-    callApi(contextData, "GET", "/get-status", callbackGetStatus, null);
-  };
 
   const updateNavLinks = () => {
     if ((contextData.slots_only == null) || (contextData.slots_only == false)) {
@@ -167,15 +162,6 @@ const Casino = () => {
           />
         </>
       );
-    }
-  };
-
-  const callbackGetStatus = (result) => {
-    if (result.status === 500 || result.status === 422) {
-      setMessageCustomAlert(["error", result.message]);
-    } else {
-      contextData.slots_only = result && result.slots_only;
-      updateNavLinks();
     }
   };
 

@@ -77,22 +77,9 @@ const LiveCasino = () => {
     setShouldShowGameModal(false);
 
     getPage("livecasino");
-    getStatus();
 
     window.scrollTo(0, 0);
   }, [location.pathname]);
-
-  const getStatus = () => {
-    callApi(contextData, "GET", "/get-status", callbackGetStatus, null);
-  };
-
-  const callbackGetStatus = (result) => {
-    if (result.status === 500 || result.status === 422) {
-      setMessageCustomAlert(["error", result.message]);
-    } else {
-      contextData.slots_only = result && result.slots_only;
-    }
-  };
 
   const getPage = (page) => {
     setIsLoadingGames(true);

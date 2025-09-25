@@ -1,7 +1,6 @@
 import { useState } from "react";
 import { useNavigate } from "react-router-dom";
 import UserMenu from "../components/UserMenu";
-import NavLinkHeader from "../components/NavLinkHeader";
 import ImgLogo from "/src/assets/img/logo.png";
 import IconProfile from "/src/assets/svg/profile.svg";
 import IconHamburger from "/src/assets/svg/hamburger.svg";
@@ -32,68 +31,7 @@ const Header = ({ isLogin, userBalance, handleLoginClick, handleLogoutClick, han
                     </div>
                     <div className="header_headerLinks">
                         {
-                            isLogin ? fragmentNavLinksTop :
-                            <>
-                                {
-                                    isSlotsOnly === "" ?
-                                        <>
-                                            <NavLinkHeader
-                                                title="Home"
-                                                pageCode="home"
-                                                icon=""
-                                            />
-                                            <NavLinkHeader
-                                                title="Casino"
-                                                pageCode="casino"
-                                                icon=""
-                                            />
-                                            <NavLinkHeader
-                                                title="Live Casino"
-                                                pageCode="live-casino"
-                                                icon=""
-                                            />
-                                            <NavLinkHeader
-                                                title="Sport"
-                                                pageCode="sports"
-                                                icon=""
-                                            />
-                                        </> : isSlotsOnly === "false" ?
-                                            <>
-                                                <NavLinkHeader
-                                                    title="Home"
-                                                    pageCode="home"
-                                                    icon=""
-                                                />
-                                                <NavLinkHeader
-                                                    title="Casino"
-                                                    pageCode="casino"
-                                                    icon=""
-                                                />
-                                                <NavLinkHeader
-                                                    title="Live Casino"
-                                                    pageCode="live-casino"
-                                                    icon=""
-                                                />
-                                                <NavLinkHeader
-                                                    title="Sport"
-                                                    pageCode="sports"
-                                                    icon=""
-                                                />
-                                            </> :
-                                            <>
-                                                <NavLinkHeader
-                                                    title="Home"
-                                                    pageCode="home"
-                                                    icon=""
-                                                />
-                                                <NavLinkHeader
-                                                    title="Casino"
-                                                    pageCode="casino"
-                                                    icon=""
-                                                />
-                                            </>
-                                }
-                            </>
+                            fragmentNavLinksTop
                         }
                     </div>
                     <div className="header-right_headerRight">
