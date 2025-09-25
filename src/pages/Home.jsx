@@ -93,8 +93,9 @@ const Home = () => {
 
     setSelectedPage("home");
     getPage("home");
-
     getStatus();
+
+    window.scrollTo(0, 0);
   }, [location.pathname]);
 
   useEffect(() => {
@@ -399,7 +400,7 @@ const Home = () => {
             </div>
             {isLoadingGames && <GamesLoading />}
             <div className="games-cards-suspensed_seeMoreWrapper">
-              <a href="/casino">
+              <a onClick={() => navigate("/casino")}>
                 <button className="button_button button_zeusPrimary button_md">See more</button>
               </a>
             </div>
@@ -437,7 +438,7 @@ const Home = () => {
             </div>
             {isLoadingGames && <GamesLoading />}
             <div className="games-cards-suspensed_seeMoreWrapper">
-              <a href="/live-casino">
+              <a onClick={() => navigate("/live-casino")}>
                 <button className="button_button button_zeusPrimary button_md">See more</button>
               </a>
             </div>

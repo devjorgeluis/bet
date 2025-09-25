@@ -1,4 +1,5 @@
 import { useState } from "react";
+import { useNavigate } from "react-router-dom";
 import UserMenu from "../components/UserMenu";
 import NavLinkHeader from "../components/NavLinkHeader";
 import ImgLogo from "/src/assets/img/logo.png";
@@ -6,6 +7,7 @@ import IconProfile from "/src/assets/svg/profile.svg";
 import IconHamburger from "/src/assets/svg/hamburger.svg";
 
 const Header = ({ isLogin, userBalance, handleLoginClick, handleLogoutClick, handleChangePasswordClick, fragmentNavLinksTop, isSlotsOnly }) => {
+    const navigate = useNavigate();
     const [showUserMenu, setShowUserMenu] = useState(false);
     const openMenu = () => {
         setShowUserMenu(!showUserMenu);
@@ -19,7 +21,7 @@ const Header = ({ isLogin, userBalance, handleLoginClick, handleLogoutClick, han
             <header className="header_header">
                 <div className="header_headerInner">
                     <div className="header_headerLeftContent">
-                        <a href="/">
+                        <a onClick={() => navigate("/")}>
                             <img
                                 title="Casino"
                                 alt="Casino"

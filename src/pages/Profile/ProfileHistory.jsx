@@ -1,5 +1,5 @@
 import { useState, useEffect, useContext } from "react";
-import { useNavigate } from "react-router-dom";
+import { useNavigate, useLocation } from "react-router-dom";
 import Calendar from 'react-calendar';
 import { AppContext } from "../../AppContext";
 import { callApi } from "../../utils/Utils";
@@ -12,6 +12,7 @@ import IconFilter from "/src/assets/svg/filter.svg";
 
 const ProfileHistory = () => {
     const navigate = useNavigate();
+    const location = useLocation();
     const { contextData } = useContext(AppContext);
 
     const getDefaultDates = () => {
@@ -150,6 +151,10 @@ const ProfileHistory = () => {
             navigate("/");
         }
     }, [contextData?.session, navigate]);
+
+    useEffect(() => {
+        window.scrollTo(0, 0);
+    }, [location.pathname]);    
 
     useEffect(() => {
         fetchHistory(activeTab);

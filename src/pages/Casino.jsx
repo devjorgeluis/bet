@@ -86,8 +86,9 @@ const Casino = () => {
 
     setSelectedPage("casino");
     getPage("casino");
-
     getStatus();
+
+    window.scrollTo(0, 0);
   }, [location.pathname]);
 
 

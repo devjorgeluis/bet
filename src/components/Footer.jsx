@@ -1,5 +1,5 @@
 import { useState } from "react";
-import { useLocation } from "react-router-dom";
+import { useNavigate, useLocation } from "react-router-dom";
 import ImgLogo from "/src/assets/img/logo.png";
 import IconFacebook from "/src/assets/svg/facebook.svg";
 import IconInstagram from "/src/assets/svg/instagram.svg";
@@ -12,6 +12,7 @@ import PrivacyModal from "./PrivacyModal";
 import ResponsibleGamingModal from "./ResponsibleGamingModal";
 
 const Footer = ({ isSlotsOnly }) => {
+    const navigate = useNavigate();
     const location = useLocation();
     const [isTermsModalOpen, setIsTermsModalOpen] = useState(false);
     const [isPrivacyModalOpen, setIsPrivacyModalOpen] = useState(false);
@@ -24,7 +25,7 @@ const Footer = ({ isSlotsOnly }) => {
                     <div className="footer_headerLinksWrapper">
                         <div className="footer_headerLinks">
                             <div className="footer_headerLinksInfo">
-                                <a href="/">
+                                <a onClick={() => navigate("/")}>
                                     <img alt="" loading="lazy" width="118" height="48" decoding="async"  className="logo_logo" src={ImgLogo} />
                                 </a>
                                 <p>2025 all rights reserved.This site operates under license of Curacao - Netherlands Antilles</p>
@@ -32,18 +33,18 @@ const Footer = ({ isSlotsOnly }) => {
                             <div className="footer_headerLinksBlock">
                                 <div className="footer_linksItem">
                                     <span className="footer_linksItemTitle">SECTIONS</span>
-                                    <a href="/">
+                                    <a onClick={() => navigate("/")}>
                                         <span className={`footer-link_footerLink ${location.pathname === '/' ? 'footer-link_active' : ''}`}>Home</span>
                                     </a>
-                                    <a href="/casino">
+                                    <a onClick={() => navigate("/casino")}>
                                         <span className={`footer-link_footerLink ${location.pathname === '/casino' ? 'footer-link_active' : ''}`}>Casino</span>
                                     </a>
                                     {
                                         isSlotsOnly === "false" && <>
-                                            <a href="/live-casino">
+                                            <a onClick={() => navigate("/live-casino")}>
                                                 <span className={`footer-link_footerLink ${location.pathname === '/live-casino' ? 'footer-link_active' : ''}`}>Live Casino</span>
                                             </a>
-                                            <a href="/sports">
+                                            <a onClick={() => navigate("/sports")}>
                                                 <span className={`footer-link_footerLink ${location.pathname === '/sports' ? 'footer-link_active' : ''}`}>Sport</span>
                                             </a>
                                         </>
@@ -68,13 +69,13 @@ const Footer = ({ isSlotsOnly }) => {
                             <div className="footer_linksItem">
                                 <span className="footer_linksItemTitle">Follow us on our social networks</span>
                                 <div className="footer_socialLinks">
-                                    <a className="footer-social-link_footerSocialLink" href="/">
+                                    <a className="footer-social-link_footerSocialLink" onClick={() => navigate("/")}>
                                         <img src={IconFacebook} />
                                     </a>
-                                    <a className="footer-social-link_footerSocialLink" href="/">
+                                    <a className="footer-social-link_footerSocialLink" onClick={() => navigate("/")}>
                                         <img src={IconInstagram} />
                                     </a>
-                                    <a className="footer-social-link_footerSocialLink" href="/">
+                                    <a className="footer-social-link_footerSocialLink" onClick={() => navigate("/")}>
                                         <img src={IconTelegram} />
                                     </a>
                                 </div>

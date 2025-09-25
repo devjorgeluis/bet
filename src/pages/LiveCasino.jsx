@@ -77,8 +77,9 @@ const LiveCasino = () => {
     setShouldShowGameModal(false);
 
     getPage("livecasino");
-
     getStatus();
+
+    window.scrollTo(0, 0);
   }, [location.pathname]);
 
   const getStatus = () => {

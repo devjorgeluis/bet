@@ -1,9 +1,10 @@
 import { useContext, useEffect } from "react";
-import { useNavigate } from "react-router-dom";
+import { useNavigate, useLocation } from "react-router-dom";
 import { AppContext } from "../../AppContext";
 
 const Profile = () => {
     const navigate = useNavigate();
+    const location = useLocation();
     const { contextData } = useContext(AppContext);
 
     useEffect(() => {
@@ -11,6 +12,10 @@ const Profile = () => {
             navigate("/");
         }
     }, [contextData?.session, navigate]);
+
+    useEffect(() => {
+        window.scrollTo(0, 0);
+    }, [location.pathname]);
 
     return (
         <>

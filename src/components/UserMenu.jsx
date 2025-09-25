@@ -1,4 +1,5 @@
 import React, { useContext } from "react";
+import { useNavigate } from "react-router-dom";
 import { AppContext } from "../AppContext";
 import IconProfileCircle from "/src/assets/svg/profile-circle.svg";
 import IconHistory from "/src/assets/svg/history.svg";
@@ -7,6 +8,7 @@ import IconPassword from "/src/assets/svg/password.svg";
 import IconLogout from "/src/assets/svg/logout.svg";
 
 const UserMenu = ({ handleChangePasswordClick, handleLogoutClick, onClose }) => {
+    const navigate = useNavigate();
     const { contextData } = useContext(AppContext);
 
     return (
@@ -22,15 +24,15 @@ const UserMenu = ({ handleChangePasswordClick, handleLogoutClick, onClose }) => 
                             </div>
                         </div>
                         <div className="mobile-menu-links_linksList">
-                            <a className="mobile-menu-links_link" href="/profile">
+                            <a className="mobile-menu-links_link" onClick={() => {navigate("/profile"); onClose();}}>
                                 <img className="mobile-menu-links_icon" src={IconProfileCircle} />
                                 <span className="mobile-menu-links_linkText">My data</span>
                             </a>
-                            <a className="mobile-menu-links_link" href="/profile/history">
+                            <a className="mobile-menu-links_link" onClick={() => {navigate("/profile/history"); onClose();}}>
                                 <img className="mobile-menu-links_icon" src={IconHistory} />
                                 <span className="mobile-menu-links_linkText">History</span>
                             </a>
-                            <a className="mobile-menu-links_link" href="/profile/notification">
+                            <a className="mobile-menu-links_link" onClick={() => {navigate("/profile/notification"); onClose();}}>
                                 <img className="mobile-menu-links_icon" src={IconNotification} />
                                 <span className="mobile-menu-links_linkText">Notifications</span>
                                 {/* <div className="notifications-counter_notificationsCounter notifications-counter_md">
@@ -50,10 +52,10 @@ const UserMenu = ({ handleChangePasswordClick, handleLogoutClick, onClose }) => 
                 }
                 
                 <div className="mobile-menu-navigation_mobileMenuNav">
-                    <a className="mobile-menu-navigation_mobileMenuLink" href="/">Home</a>
-                    <a className="mobile-menu-navigation_mobileMenuLink" href="/casino">Casino</a>
-                    <a className="mobile-menu-navigation_mobileMenuLink" href="/live-casino">Live Casino</a>
-                    <a className="mobile-menu-navigation_mobileMenuLink" href="/sports">Sport</a>
+                    <a className="mobile-menu-navigation_mobileMenuLink" onClick={() => {navigate("/"); onClose();}}>Home</a>
+                    <a className="mobile-menu-navigation_mobileMenuLink" onClick={() => {navigate("/casino"); onClose();}}>Casino</a>
+                    <a className="mobile-menu-navigation_mobileMenuLink" onClick={() => {navigate("/live-casino"); onClose();}}>Live Casino</a>
+                    <a className="mobile-menu-navigation_mobileMenuLink" onClick={() => {navigate("/sports"); onClose();}}>Sport</a>
                 </div>
             </div>
         </div>
