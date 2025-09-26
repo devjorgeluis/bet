@@ -3369,7 +3369,7 @@
 .react-slideshow-container+ul.indicators {
     position: absolute;
     z-index: 1;
-    top: 12px;
+    top: 60px;
     right: 12px;
     display: flex;
     justify-content: center;
@@ -3381,7 +3381,6 @@
 
 @media (max-width: 768px) {
     .react-slideshow-container+ul.indicators {
-        top: 60px;
         padding: 10px 14px;
     }
 }
