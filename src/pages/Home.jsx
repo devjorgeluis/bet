@@ -240,6 +240,7 @@ const Home = () => {
     } else {
       setPageData(result.data);
       setSelectedProvider(null);
+      setActiveCategory({});
 
       if (result.data.categories && result.data.categories.length > 0) {
         let item = result.data.categories[0];
@@ -497,7 +498,7 @@ const Home = () => {
           <div className="top-games">
             <div className="games-block-title_gamesBlockTitle">
               <div className="games-block-title_gamesBlockTitleSeparator games-block-title_gamesBlockTitleLeft"></div>
-              <p className="games-block-title_gamesBlockTitleText">{selectedPage === "home" ? "Top Games" : activeCategory.name}</p>
+              <p className="games-block-title_gamesBlockTitleText">Top Games</p>
               <div className="games-block-title_gamesBlockTitleSeparator games-block-title_gamesBlockTitleRight"></div>
             </div>
             <div className="games-cards-suspensed_gameCardWrapper">

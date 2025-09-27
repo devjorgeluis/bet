@@ -111,28 +111,28 @@ const Casino = () => {
             pageCode="hot"
             icon={ImgHot}
             active={selectedPage === "hot"}
-            onClick={() => getPage("hot")}
+            onClick={() => getSubPage("hot")}
           />
           <NavLinkIcon
             title="Habilidad"
             pageCode="arcade"
             icon={ImgCrash}
             active={selectedPage === "arcade"}
-            onClick={() => getPage("arcade")}
+            onClick={() => getSubPage("arcade")}
           />
           <NavLinkIcon
             title="Megaways"
             pageCode="megaways"
             icon={ImgMegaways}
             active={selectedPage === "megaways"}
-            onClick={() => getPage("megaways")}
+            onClick={() => getSubPage("megaways")}
           />
           <NavLinkIcon
             title="Ruleta"
             pageCode="roulette"
             icon={ImgRoulette}
             active={selectedPage === "roulette"}
-            onClick={() => getPage("roulette")}
+            onClick={() => getSubPage("roulette")}
           />
         </>
       );
@@ -151,14 +151,14 @@ const Casino = () => {
             pageCode="hot"
             icon={ImgHot}
             active={selectedPage === "hot"}
-            onClick={() => getPage("hot")}
+            onClick={() => getSubPage("hot")}
           />
           <NavLinkIcon
             title="Megaways"
             pageCode="megaways"
             icon={ImgMegaways}
             active={selectedPage === "megaways"}
-            onClick={() => getPage("megaways")}
+            onClick={() => getSubPage("megaways")}
           />
         </>
       );
@@ -197,6 +197,28 @@ const Casino = () => {
     }
   };
 
+  const getSubPage = (page) => {
+    setIsLoadingGames(true);
+    setGames([]);
+    setSelectedPage(page);
+    callApi(contextData, "GET", "/get-page?page=" + page, callbackGetSubPage, null);
+  };
+
+  const callbackGetSubPage = (result) => {
+    if (result.status === 500 || result.status === 422) {
+      setMessageCustomAlert(["error", result.message]);
+    } else {
+      setPageData(result.data);
+      setSelectedProvider(null);
+      setActiveCategory({});
+
+      if (result.data.categories && result.data.categories.length > 0) {
+        let item = result.data.categories[0];
+        fetchContent(item, item.id, item.table_name, 0, false, result.data.page_group_code);
+      }
+    }
+  };
+
   useEffect(() => {
     if (categories.length > 0) {
       const urlParams = new URLSearchParams(location.search);
@@ -228,7 +250,7 @@ const Casino = () => {
     }
   };
 
-  const fetchContent = (category, categoryId, tableName, categoryIndex, resetCurrentPage) => {
+  const fetchContent = (category, categoryId, tableName, categoryIndex, resetCurrentPage, pageGroupCode) => {
     let pageSize = 30;
     setIsLoadingGames(true);
 
@@ -241,8 +263,10 @@ const Casino = () => {
     setSelectedCategoryIndex(categoryIndex);
     setTxtSearch("");
 
+    const groupCode = pageGroupCode || pageData.page_group_code;
+
     let apiUrl = "/games/?page_group_type=categories&page_group_code=" +
-      pageData.page_group_code +
+      groupCode +
       "&table_name=" +
       tableName +
       "&apigames_category_id=" +
@@ -481,7 +505,7 @@ const Casino = () => {
           <div className="active-games">
             <div className="games-block-title_gamesBlockTitle">
               <div className="games-block-title_gamesBlockTitleSeparator games-block-title_gamesBlockTitleLeft"></div>
-              <p className="games-block-title_gamesBlockTitleText">{activeCategory.name}</p>
+              <p className="games-block-title_gamesBlockTitleText">Top Games</p>
               <div className="games-block-title_gamesBlockTitleSeparator games-block-title_gamesBlockTitleRight"></div>
             </div>
 
