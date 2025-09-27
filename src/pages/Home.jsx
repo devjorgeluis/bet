@@ -11,6 +11,8 @@ import CategorySlideshow from "../components/CategorySlideshow";
 import GameModal from "../components/GameModal";
 import DivLoading from "../components/DivLoading";
 import GamesLoading from "../components/GamesLoading";
+import SearchInput from "../components/SearchInput";
+import SearchSelect from "../components/SearchSelect";
 import LoginModal from "../components/LoginModal";
 import CustomAlert from "../components/CustomAlert";
 import "animate.css";
@@ -40,23 +42,28 @@ const Home = () => {
   const { isLogin } = useContext(LayoutContext);
   const { setShowFullDivLoading } = useContext(NavigationContext);
   const [selectedPage, setSelectedPage] = useState("lobby");
-  const [selectedCategoryIndex, setSelectedCategoryIndex] = useState(0);
+  const [selectedCategoryIndex, setSelectedCategoryIndex] = useState(-1);
   const [games, setGames] = useState([]);
   const [topGames, setTopGames] = useState([]);
   const [topLiveCasino, setTopLiveCasino] = useState([]);
-  const [activeCategory, setActiveCategory] = useState({});
   const [categories, setCategories] = useState([]);
+  const [activeCategory, setActiveCategory] = useState({});
+  const [selectedProvider, setSelectedProvider] = useState(null);
+  const [isProviderDropdownOpen, setIsProviderDropdownOpen] = useState(false);
   const [pageData, setPageData] = useState({});
   const [gameUrl, setGameUrl] = useState("");
   const [fragmentNavLinksBody, setFragmentNavLinksBody] = useState(<></>);
   const [showLoginModal, setShowLoginModal] = useState(false);
   const [isMobile, setIsMobile] = useState(false);
+  const [txtSearch, setTxtSearch] = useState("");
+  const [searchDelayTimer, setSearchDelayTimer] = useState();
   const [messageCustomAlert, setMessageCustomAlert] = useState(["", ""]);
   const [shouldShowGameModal, setShouldShowGameModal] = useState(false);
   const [isLoadingGames, setIsLoadingGames] = useState(false);
   const refGameModal = useRef();
   const navigate = useNavigate();
   const location = useLocation();
+  const searchRef = useRef(null);
 
   let imageSlideshow = isMobile ? [ImgMobileBanner1, ImgMobileBanner2, ImgMobileBanner3] : [ImgBanner1, ImgBanner2, ImgBanner3];
 
@@ -122,28 +129,28 @@ const Home = () => {
             pageCode="hot"
             icon={ImgHot}
             active={selectedPage === "hot"}
-            onClick={() => getPage("hot")}
+            onClick={() => getSubPage("hot")}
           />
           <NavLinkIcon
             title="Habilidad"
             pageCode="arcade"
             icon={ImgCrash}
             active={selectedPage === "arcade"}
-            onClick={() => getPage("arcade")}
+            onClick={() => getSubPage("arcade")}
           />
           <NavLinkIcon
             title="Megaways"
             pageCode="megaways"
             icon={ImgMegaways}
             active={selectedPage === "megaways"}
-            onClick={() => getPage("megaways")}
+            onClick={() => getSubPage("megaways")}
           />
           <NavLinkIcon
             title="Ruleta"
             pageCode="roulette"
             icon={ImgRoulette}
             active={selectedPage === "roulette"}
-            onClick={() => getPage("roulette")}
+            onClick={() => getSubPage("roulette")}
           />
         </>
       );
@@ -162,14 +169,14 @@ const Home = () => {
             pageCode="hot"
             icon={ImgHot}
             active={selectedPage === "hot"}
-            onClick={() => getPage("hot")}
+            onClick={() => getSubPage("hot")}
           />
           <NavLinkIcon
             title="Megaways"
             pageCode="megaways"
             icon={ImgMegaways}
             active={selectedPage === "megaways"}
-            onClick={() => getPage("megaways")}
+            onClick={() => getSubPage("megaways")}
           />
         </>
       );
@@ -209,7 +216,7 @@ const Home = () => {
         }
       } else {
         if (result.data.page_group_type === "categories") {
-          setSelectedCategoryIndex(0);
+          setSelectedCategoryIndex(-1);
         }
         if (result.data.page_group_type === "games") {
           loadMoreContent();
@@ -217,15 +224,29 @@ const Home = () => {
       }
       pageCurrent = 0;
     }
+    setIsLoadingGames(false);
   };
 
-  useEffect(() => {
-    if (categories.length > 0) {
-      let item = categories[0];
-      fetchContent(item, item.id, item.table_name, 0, false);
-      setActiveCategory(item);
+  const getSubPage = (page) => {
+    setIsLoadingGames(true);
+    setGames([]);
+    setSelectedPage(page);
+    callApi(contextData, "GET", "/get-page?page=" + page, callbackGetSubPage, null);
+  };
+
+  const callbackGetSubPage = (result) => {
+    if (result.status === 500 || result.status === 422) {
+      setMessageCustomAlert(["error", result.message]);
+    } else {
+      setPageData(result.data);
+      setSelectedProvider(null);
+
+      if (result.data.categories && result.data.categories.length > 0) {
+        let item = result.data.categories[0];
+        fetchContent(item, item.id, item.table_name, 0, false, result.data.page_group_code);
+      }
     }
-  }, [categories]);
+  };
 
   const loadMoreContent = () => {
     let item = categories[selectedCategoryIndex];
@@ -234,7 +255,7 @@ const Home = () => {
     }
   };
 
-  const fetchContent = (category, categoryId, tableName, categoryIndex, resetCurrentPage) => {
+  const fetchContent = (category, categoryId, tableName, categoryIndex, resetCurrentPage, pageGroupCode = null) => {
     let pageSize = 30;
 
     if (resetCurrentPage === true) {
@@ -245,11 +266,13 @@ const Home = () => {
     setActiveCategory(category);
     setSelectedCategoryIndex(categoryIndex);
 
+    const groupCode = pageGroupCode || pageData.page_group_code;
+
     callApiService(
       contextData,
       "GET",
       "/games/?page_group_type=categories&page_group_code=" +
-      pageData.page_group_code +
+      groupCode +
       "&table_name=" +
       tableName +
       "&apigames_category_id=" +
@@ -332,6 +355,79 @@ const Home = () => {
     setMessageCustomAlert(["", ""]);
   };
 
+  const handleProviderSelect = (provider, index = 0) => {
+    setSelectedProvider(provider);
+    setIsProviderDropdownOpen(false);
+    setTxtSearch("");
+    if (categories.length > 0 && provider) {
+      setActiveCategory(provider);
+      fetchContent(provider, provider.id, provider.table_name, index, true);
+    } else if (!provider && categories.length > 0) {
+      const firstCategory = categories[0];
+      setActiveCategory(firstCategory);
+      fetchContent(firstCategory, firstCategory.id, firstCategory.table_name, 0, true);
+    }
+  };
+
+  const search = (e) => {
+    let keyword = e.target.value;
+    setTxtSearch(keyword);
+
+    if (navigator.userAgent.match(/Android|BlackBerry|iPhone|iPad|iPod|Opera Mini|IEMobile/i)) {
+      let keyword = e.target.value;
+      do_search(keyword);
+    } else {
+      if (
+        (e.keyCode >= 48 && e.keyCode <= 57) ||
+        (e.keyCode >= 65 && e.keyCode <= 90) ||
+        e.keyCode == 8 ||
+        e.keyCode == 46
+      ) {
+        do_search(keyword);
+      }
+    }
+
+    if (e.key === "Enter" || e.keyCode === 13 || e.key === "Escape" || e.keyCode === 27) {
+      searchRef.current?.blur();
+    }
+  };
+
+  const do_search = (keyword) => {
+    clearTimeout(searchDelayTimer);
+
+    if (keyword == "") {
+      return;
+    }
+
+    setGames([]);
+    setIsLoadingGames(true);
+
+    let pageSize = 20;
+
+    let searchDelayTimerTmp = setTimeout(function () {
+      callApi(
+        contextData,
+        "GET",
+        "/search-content?keyword=" + txtSearch + "&page_group_code=" + pageData.page_group_code + "&length=" + pageSize,
+        callbackSearch,
+        null
+      );
+    }, 1000);
+
+    setSearchDelayTimer(searchDelayTimerTmp);
+  };
+
+  const callbackSearch = (result) => {
+    if (result.status === 500 || result.status === 422) {
+      setMessageCustomAlert(["error", result.message]);
+    } else {
+      configureImageSrc(result, true);
+      setGames(result.content);
+      pageCurrent = 0;
+    }
+    setIsLoadingGames(false);
+  };
+
   return (
     <>
       <CustomAlert message={messageCustomAlert} onClose={handleAlertClose} />
@@ -368,6 +464,34 @@ const Home = () => {
               onCategoryClick={fetchContent}
               pageType="home"
             /> : <DivLoading />
+          }
+
+          {
+            selectedPage !== "home" && <div className="slots-filters_gamesFilters">
+              <div className="slots-filters_searchSection">
+                <SearchInput
+                  txtSearch={txtSearch}
+                  setTxtSearch={setTxtSearch}
+                  searchRef={searchRef}
+                  search={search}
+                  contextData={contextData}
+                  pageData={pageData}
+                  setGames={setGames}
+                  setIsLoadingGames={setIsLoadingGames}
+                  callbackSearch={callbackSearch}
+                  searchDelayTimer={searchDelayTimer}
+                  setSearchDelayTimer={setSearchDelayTimer}
+                />
+                <SearchSelect
+                  categories={categories}
+                  selectedProvider={selectedProvider}
+                  setSelectedProvider={setSelectedProvider}
+                  isProviderDropdownOpen={isProviderDropdownOpen}
+                  setIsProviderDropdownOpen={setIsProviderDropdownOpen}
+                  onProviderSelect={handleProviderSelect}
+                />
+              </div>
+            </div>
           }
 
           <div className="top-games">
