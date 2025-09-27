@@ -1,4 +1,4 @@
-import React, { createContext, useState } from "react";
+import React, { createContext, useState, useEffect } from "react";
 export const AppContext = createContext(null);
 
 // este bloque de código se ejecuta antes de renderizar la página
@@ -9,13 +9,16 @@ const AppContextProvider = (props) => {
   let cdnUrl = import.meta.env.VITE_CDN_URL;
   let pageTitle = import.meta.env.VITE_PAGE_TITLE;
   let buildMode = import.meta.env.MODE;
-  let session = null;
-  if (
-    localStorage.getItem("session") &&
-    localStorage.getItem("session") !== "undefined"
-  ) {
-    session = JSON.parse(localStorage.getItem("session"));
-  }
+
+  const getSessionFromStorage = () => {
+    if (
+      localStorage.getItem("session") &&
+      localStorage.getItem("session") !== "undefined"
+    ) {
+      return JSON.parse(localStorage.getItem("session"));
+    }
+    return null;
+  };
 
   let isMobile = navigator.userAgent.match(
     /Android|BlackBerry|iPhone|iPad|iPod|Opera Mini|IEMobile/i
@@ -27,13 +30,20 @@ const AppContextProvider = (props) => {
     serviceUrl: serviceUrl,
     cdnUrl: cdnUrl,
     buildMode: buildMode,
-    session: session,
+    session: getSessionFromStorage(),
     isMobile: isMobile,
     pageTitle: pageTitle,
   });
+
+  const updateSession = (newSession) => {
+    setContextData(prev => ({
+      ...prev,
+      session: newSession
+    }));
+  };
   
   return (
-    <AppContext.Provider value={{ contextData, setContextData }}>
+    <AppContext.Provider value={{ contextData, setContextData, updateSession }}>
       {props.children}
     </AppContext.Provider>
   );

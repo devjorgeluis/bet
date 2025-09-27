@@ -7,8 +7,8 @@ import IconClose from "/src/assets/svg/close.svg";
 import IconEye from "/src/assets/svg/eye.svg";
 import IconEyeSlash from "/src/assets/svg/eye-slash.svg";
 
-const LoginModal = ({ isOpen, onClose }) => {
-    const { contextData } = useContext(AppContext);
+const LoginModal = ({ isOpen, onClose, onLoginSuccess }) => {
+    const { contextData, updateSession } = useContext(AppContext);
     const [username, setUsername] = useState("");
     const [password, setPassword] = useState("");
     const [showPassword, setShowPassword] = useState(false);
@@ -37,7 +37,14 @@ const LoginModal = ({ isOpen, onClose }) => {
         if (result.status === "success") {
             setMessageCustomAlert(["success", "¡Éxito! La sesión ha sido iniciada"]);
             localStorage.setItem("session", JSON.stringify(result));
-            window.location.href = "/";
+            updateSession(result);
+
+            if (onLoginSuccess) {
+                onLoginSuccess(result.user.balance);
+            }
+            setTimeout(() => {
+                onClose();
+            }, 1000);
         } else {
             setMessageCustomAlert(["error", "¡Error! Nombre de usuario o contraseña no válidos"]);
         }
@@ -74,7 +81,7 @@ const LoginModal = ({ isOpen, onClose }) => {
                             <form className="login-form_loginFormForm" method="POST" onSubmit={handleSubmit}>
                                 <div className="input-wrapper_inputWrapper input-wrapper_default">
                                     <div>
-                                        <label for="username" className="input-wrapper_inputWrapperLabel">
+                                        <label htmlFor="username" className="input-wrapper_inputWrapperLabel">
                                             <span className="input-wrapper_inputWrapperInput">
                                                 <input
                                                     className="input_input login-form_loginFormInput"
@@ -94,7 +101,7 @@ const LoginModal = ({ isOpen, onClose }) => {
                                 
                                 <div className="input-wrapper_inputWrapper input-wrapper_default">
                                     <div>
-                                        <label for="password" className="input-wrapper_inputWrapperLabel">
+                                        <label htmlFor="password" className="input-wrapper_inputWrapperLabel">
                                             <span className="input-wrapper_inputWrapperInput">
                                                 <input
                                                     id="password"

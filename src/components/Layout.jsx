@@ -16,7 +16,7 @@ import FullDivLoading from "./FullDivLoading";
 const Layout = () => {
     const { contextData } = useContext(AppContext);
     const [selectedPage, setSelectedPage] = useState("lobby");
-    const [isLogin, setIsLogin] = useState(contextData.isLogin);
+    const [isLogin, setIsLogin] = useState(contextData.session !== null);
     const [isMobile, setIsMobile] = useState(false);
     const [userBalance, setUserBalance] = useState("");
     const [showLoginModal, setShowLoginModal] = useState(false);
@@ -33,7 +33,9 @@ const Layout = () => {
     useEffect(() => {
         if (contextData.session != null) {
             setIsLogin(true);
-            refreshBalance();
+            if (contextData.session.user && contextData.session.user.balance) {
+                setUserBalance(contextData.session.user.balance);
+            }
         }
         getStatus();
     }, [contextData.session]);
@@ -130,6 +132,10 @@ const Layout = () => {
         setShowLoginModal(true);
     };
 
+    const handleLoginSuccess = (balance) => {
+        setUserBalance(balance);
+    };
+
     const handleLoginConfirm = () => {
         setIsLogin(true);
         refreshBalance();
@@ -181,7 +187,7 @@ const Layout = () => {
                         <LoginModal
                             isOpen={showLoginModal}
                             onClose={() => setShowLoginModal(false)}
-                            onConfirm={handleLoginConfirm}
+                            onLoginSuccess={handleLoginSuccess}
                         />
                     )}
                     {showLogoutModal && (
