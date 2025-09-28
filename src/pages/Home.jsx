@@ -42,7 +42,7 @@ const Home = () => {
   const { isLogin } = useContext(LayoutContext);
   const { setShowFullDivLoading } = useContext(NavigationContext);
   const [selectedPage, setSelectedPage] = useState("lobby");
-  const [selectedCategoryIndex, setSelectedCategoryIndex] = useState(-1);
+  const [selectedCategoryIndex, setSelectedCategoryIndex] = useState(0);
   const [games, setGames] = useState([]);
   const [topGames, setTopGames] = useState([]);
   const [topLiveCasino, setTopLiveCasino] = useState([]);
@@ -244,7 +244,7 @@ const Home = () => {
 
       if (result.data.categories && result.data.categories.length > 0) {
         let item = result.data.categories[0];
-        fetchContent(item, item.id, item.table_name, 0, false, result.data.page_group_code);
+        fetchContent(item, item.id, item.table_name, 0, true, result.data.page_group_code);
       }
     }
   };

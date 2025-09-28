@@ -214,7 +214,7 @@ const Casino = () => {
 
       if (result.data.categories && result.data.categories.length > 0) {
         let item = result.data.categories[0];
-        fetchContent(item, item.id, item.table_name, 0, false, result.data.page_group_code);
+        fetchContent(item, item.id, item.table_name, 0, true, result.data.page_group_code);
       }
     }
   };
