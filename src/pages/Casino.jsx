@@ -285,7 +285,11 @@ const Casino = () => {
     setSelectedCategoryIndex(categoryIndex);
     setTxtSearch("");
 
-    const groupCode = pageGroupCode || pageData.page_group_code;
+    const groupCode = pageGroupCode || pageData.page_group_type === "categories" ? pageData.page_group_code : "default_pages_home";
+    console.log(pageData);
+    
+    console.log(groupCode);
+    
 
     let apiUrl = "/games/?page_group_type=categories&page_group_code=" +
       groupCode +
