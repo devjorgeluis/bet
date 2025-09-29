@@ -37,7 +37,7 @@ const Header = ({ isLogin, userBalance, handleLoginClick, handleLogoutClick, han
                     <div className="header-right_headerRight">
                         {isLogin ? (
                             <>
-                                <div className="header-right_headerBalance">{userBalance ? userBalance + " $" : ""}</div>
+                                <div className="header-right_headerBalance">{userBalance ? parseFloat(userBalance).toFixed(2) + " $" : ""}</div>
                                 <div className="header-right_headerRightUser" onClick={() => openMenu()}>
                                     <img src={IconProfile} width={20} height={20} />
                                     {/* <span className="header-right_unreadNotificationCounter">

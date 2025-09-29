@@ -20,7 +20,7 @@ const UserMenu = ({ handleChangePasswordClick, handleLogoutClick, onClose }) => 
                             <div className="mobile-menu-user_userIcon">{contextData.session.user.username?.charAt(0).toUpperCase()}</div>
                             <div>
                                 <p className="mobile-menu-user_name">{contextData.session.user.username}</p>
-                                <p className="mobile-menu-user_balance">credits {contextData.session.user.balance || ''} $</p>
+                                <p className="mobile-menu-user_balance">credits {parseFloat(contextData.session.user.balance).toFixed(2) || ''} $</p>
                             </div>
                         </div>
                         <div className="mobile-menu-links_linksList">
