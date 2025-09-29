@@ -47,6 +47,7 @@ const Home = () => {
   const [topGames, setTopGames] = useState([]);
   const [topLiveCasino, setTopLiveCasino] = useState([]);
   const [categories, setCategories] = useState([]);
+  const [mainCategories, setMainCategories] = useState([]);
   const [activeCategory, setActiveCategory] = useState({});
   const [selectedProvider, setSelectedProvider] = useState(null);
   const [isProviderDropdownOpen, setIsProviderDropdownOpen] = useState(false);
@@ -210,6 +211,10 @@ const Home = () => {
       setCategories(result.data.categories);
       setPageData(result.data);
 
+      if (result.data.menu === "home") {
+        setMainCategories(result.data.categories);
+      }
+
       if (pageData.url && pageData.url !== null) {
         if (contextData.isMobile) {
           // Mobile sports workaround
@@ -241,6 +246,23 @@ const Home = () => {
       setPageData(result.data);
       setSelectedProvider(null);
       setActiveCategory({});
+
+      if (result.data.page_group_type === "categories") {
+        setCategories(result.data.categories)
+      }
+
+      if (result.data.page_group_type === "games") {
+        if (mainCategories && mainCategories.length > 0) {
+          setCategories(mainCategories);
+        } else {
+          callApi(contextData, "GET", "/get-page?page=home", (homeResult) => {
+            if (homeResult.data && homeResult.data.categories) {
+              setMainCategories(homeResult.data.categories);
+              setCategories(homeResult.data.categories);
+            }
+          }, null);
+        }
+      }
 
       if (result.data.categories && result.data.categories.length > 0) {
         let item = result.data.categories[0];
