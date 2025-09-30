@@ -24,6 +24,7 @@ import ImgMobileBanner2 from "/src/assets/img/mobile-live-casino.avif";
 import ImgMobileBanner3 from "/src/assets/img/mobile-sport.avif";
 
 import ImgLobby from "/src/assets/img/lobby.avif";
+import ImgJoker from "/src/assets/img/jokers.avif";
 import ImgHot from "/src/assets/img/hot.avif";
 import ImgCrash from "/src/assets/img/crash.avif";
 import ImgMegaways from "/src/assets/img/megaways.avif";
@@ -126,6 +127,13 @@ const Home = () => {
             onClick={() => getPage("home")}
           />
           <NavLinkIcon
+            title="Jokers"
+            pageCode="joker"
+            icon={ImgJoker}
+            active={selectedPage === "joker"}
+            onClick={() => getSubPage("joker")}
+          />
+          <NavLinkIcon
             title="Hot"
             pageCode="hot"
             icon={ImgHot}
@@ -164,6 +172,13 @@ const Home = () => {
             icon={ImgLobby}
             active={selectedPage === "home" || selectedPage === "lobby"}
             onClick={() => getPage("home")}
+          />
+          <NavLinkIcon
+            title="Jokers"
+            pageCode="joker"
+            icon={ImgJoker}
+            active={selectedPage === "joker"}
+            onClick={() => getSubPage("joker")}
           />
           <NavLinkIcon
             title="Hot"

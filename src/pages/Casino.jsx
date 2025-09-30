@@ -19,6 +19,7 @@ import "animate.css";
 import ImgBanner1 from "/src/assets/img/slots.avif";
 import ImgMobileBanner1 from "/src/assets/img/mobile-slots.avif";
 import ImgLobby from "/src/assets/img/lobby.avif";
+import ImgJoker from "/src/assets/img/jokers.avif";
 import ImgHot from "/src/assets/img/hot.avif";
 import ImgCrash from "/src/assets/img/crash.avif";
 import ImgMegaways from "/src/assets/img/megaways.avif";
@@ -108,6 +109,13 @@ const Casino = () => {
             onClick={() => getPage("home")}
           />
           <NavLinkIcon
+            title="Jokers"
+            pageCode="joker"
+            icon={ImgJoker}
+            active={selectedPage === "joker"}
+            onClick={() => getSubPage("joker")}
+          />
+          <NavLinkIcon
             title="Hot"
             pageCode="hot"
             icon={ImgHot}
@@ -148,6 +156,13 @@ const Casino = () => {
             onClick={() => getPage("home")}
           />
           <NavLinkIcon
+            title="Jokers"
+            pageCode="joker"
+            icon={ImgJoker}
+            active={selectedPage === "joker"}
+            onClick={() => getSubPage("joker")}
+          />
+          <NavLinkIcon
             title="Hot"
             pageCode="hot"
             icon={ImgHot}
@@ -186,20 +201,18 @@ const Casino = () => {
         setMainCategories(result.data.categories);
       }
 
-      if (pageData.url && pageData.url != null) {
-        if (contextData.isMobile) {
-          // Mobile sports workaround
-        }
-      } else {
-        if (result.data.page_group_type == "categories") {
-          setSelectedCategoryIndex(0);
-        }
-        if (result.data.page_group_type == "games") {
-          loadMoreContent();
-        }
+      if (result.data.page_group_type === "categories" && result.data.categories.length > 0) {
+        const firstCategory = result.data.categories[0];
+        setSelectedCategoryIndex(0);
+        setActiveCategory(firstCategory);
+        fetchContent(firstCategory, firstCategory.id, firstCategory.table_name, 0, true, result.data.page_group_code);
+      } else if (result.data.page_group_type === "games") {
+        loadMoreContent();
       }
+
       pageCurrent = 0;
     }
+    setIsLoadingGames(false);
   };
 
   const getSubPage = (page) => {
@@ -241,30 +254,6 @@ const Casino = () => {
     }
   };
 
-  useEffect(() => {
-    if (categories.length > 0) {
-      const urlParams = new URLSearchParams(location.search);
-      const providerName = urlParams.get('provider');
-      const providerId = urlParams.get('providerId');
-
-      if (providerName && providerId) {
-        const provider = categories.find(cat => cat.id.toString() === providerId.toString());
-        if (provider) {
-          const providerIndex = categories.indexOf(provider);
-          setSelectedProvider(provider);
-          setActiveCategory(provider);
-          setSelectedCategoryIndex(providerIndex);
-          fetchContent(provider, provider.id, provider.table_name, providerIndex, true);
-          return;
-        }
-      }
-
-      let item = categories[0];
-      fetchContent(item, item.id, item.table_name, 0, false);
-      setActiveCategory(item);
-    }
-  }, [categories, location.search]);
-
   const loadMoreContent = () => {
     let item = categories[selectedCategoryIndex];
     if (item) {
@@ -285,11 +274,7 @@ const Casino = () => {
     setSelectedCategoryIndex(categoryIndex);
     setTxtSearch("");
 
-    const groupCode = pageGroupCode || pageData.page_group_type === "categories" ? pageData.page_group_code : "default_pages_home";
-    console.log(pageData);
-    
-    console.log(groupCode);
-    
+    const groupCode = pageGroupCode || pageData.page_group_code;
 
     let apiUrl = "/games/?page_group_type=categories&page_group_code=" +
       groupCode +
