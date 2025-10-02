@@ -49,7 +49,7 @@ const LoginModal = ({ isOpen, onClose, onLoginSuccess }) => {
                 onClose();
             }, 1000);
         } else {
-            setMessageCustomAlert(["error", "Invalid username or password"]);
+            setMessageCustomAlert(["error", "Nombre de usuario o contraseña no válidos"]);
         }
     };
 
@@ -67,7 +67,7 @@ const LoginModal = ({ isOpen, onClose, onLoginSuccess }) => {
             <div className="modal-wrapper_modalWrapper modal-wrapper_shown">
                 <div className="modal-wrapper_modalContentWrapper modal-wrapper_hasTitle login-modal">
                     <div className="modal-wrapper-title_modalWrapperTitle">
-                        <span>Login</span>
+                        <span>Acceso</span>
                         <button onClick={onClose}>
                             <img src={IconClose} />
                         </button>
@@ -78,7 +78,7 @@ const LoginModal = ({ isOpen, onClose, onLoginSuccess }) => {
                             <img alt="" loading="lazy" width="118" height="48" className="logo_logo" src={ImgLogo} />
                         </div>
                         <div className="login-modal_modalDescription">
-                            <p className="login-modal_modalDescriptionInner">Enter your username and password to start playing</p>
+                            <p className="login-modal_modalDescriptionInner">Introduce tu nombre de usuario y contraseña para empezar a jugar</p>
                         </div>
                         <div>
                             <form className="login-form_loginFormForm" method="POST" onSubmit={handleSubmit}>
@@ -90,7 +90,7 @@ const LoginModal = ({ isOpen, onClose, onLoginSuccess }) => {
                                                     className="input_input login-form_loginFormInput"
                                                     type="text"
                                                     name="username"
-                                                    placeholder="Nombre"
+                                                    placeholder="Nombre de usuario"
                                                     autoComplete="false"
                                                     value={username}
                                                     onChange={(e) => setUsername(e.target.value)}
@@ -141,7 +141,7 @@ const LoginModal = ({ isOpen, onClose, onLoginSuccess }) => {
                                     </div>
                                     <fieldset className="input-wrapper_inputWrapperFieldset"></fieldset>
                                 </div>
-                                <button className="button_button button_zeusPrimary button_sm login-form_loginFormButton" type="submit">Login
+                                <button className="button_button button_zeusPrimary button_sm login-form_loginFormButton" type="submit">Acceso
                                     {
                                         isLoading && 
                                         <span className="button_buttonLoader">

@@ -24,12 +24,17 @@ const ChangePasswordModal = ({ onConfirm, onClose }) => {
         event.stopPropagation();
 
         if (newPassword !== confirmPassword) {
-            setMessageCustomAlert(["error", "New passwords do not match"]);
+            setMessageCustomAlert(["error", "Las nuevas contraseñas no coinciden"]);
+            return;
+        }
+
+        if (oldPassword === newPassword) {
+            setMessageCustomAlert(["error", "La contraseña antigua y la nueva no deben ser iguales."]);
             return;
         }
 
         if (newPassword === "" || confirmPassword === "" || oldPassword === "") {
-            setMessageCustomAlert(["error", "Password can't be blank."]);
+            setMessageCustomAlert(["error", "La contraseña no puede quedar en blanco."]);
             return;
         }
 
@@ -52,12 +57,12 @@ const ChangePasswordModal = ({ onConfirm, onClose }) => {
     const callbackSubmitChangePassword = (result) => {
         setIsLoading(false);
         if (result.status === "success") {
-            setMessageCustomAlert(["success", "Password changed successfully"]);
+            setMessageCustomAlert(["success", "Tu contraseña se ha cambiado y ha sido copiada."]);
             setTimeout(() => {
                 onClose();
             }, 1500);
         } else {
-            setMessageCustomAlert(["error", result.message || "Error changing password"]);
+            setMessageCustomAlert(["error", result.message || "Error ..."]);
         }
     };
 

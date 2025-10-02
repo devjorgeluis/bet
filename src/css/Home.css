@@ -1696,7 +1696,7 @@
 }
 
 .toast-card_toastWrapper {
-    max-height: 0;
+    max-height: 89px;
     transition: all .25s linear
 }
 
@@ -1723,6 +1723,10 @@
 .toast-card_toast.toast-card_shown {
     transform: translate(0);
     opacity: 1
+}
+
+.toast-card_toastWrapper.toast-card_shown {
+    opacity: 1;
 }
 
 @media(max-width: 992px) {

@@ -51,7 +51,7 @@ const Header = ({ isLogin, userBalance, handleLoginClick, handleLogoutClick, han
                             <div className="header-right_headerRight">
                                 <div className="header-right_headerBalance"></div>
                                 <div className="header-right_guestRightMenu">
-                                    <button className="button_button button_zeusPrimary button_xs" onClick={() => handleLoginClick()}>Login</button>
+                                    <button className="button_button button_zeusPrimary button_xs" onClick={() => handleLoginClick()}>Acceso</button>
                                     <button className="button_button button_ghost button_md header-right_burgerButton hidden md:flex" onClick={() => openMenu()}>
                                         <img src={IconHamburger} />
                                     </button>

@@ -1,6 +1,5 @@
 import { useState, useEffect } from "react";
-import IconSuccess from "/src/assets/svg/success.svg";
-import IconError from "/src/assets/svg/error.svg";
+import IconNotification from "/src/assets/svg/notification.svg";
 
 const CustomAlert = ({ message, onClose }) => {
   const [isVisible, setIsVisible] = useState(!!message && Array.isArray(message) && message[1] !== "");
@@ -16,7 +15,7 @@ const CustomAlert = ({ message, onClose }) => {
         if (onClose) {
           onClose();
         }
-      }, 2000);
+      }, 30000);
 
       return () => clearTimeout(timer);
     }
@@ -34,30 +33,22 @@ const CustomAlert = ({ message, onClose }) => {
   if (!isVisible) return null;
 
   return (
-    <div id="notify-root">
+    <div class="toast_toastWrapper">
       {message && Array.isArray(message) && message[1] !== "" && (
-        <div
-          className={`notification ${
-            message[0] === "success" ? "notification_type_success" : "notification_type_error"
-          }`}
-        >
-          <div className="notification__wrapper">
-            <span className="notification__text">{message[1]}</span>
-            <div className="notification__left">
-              <span
-                className="SVGInline notification__cross"
-                onClick={handleClose}
-                role="button"
-                aria-label="Close alert"
-                style={{ cursor: "pointer" }}
-              >
-                <img
-                  src={message[0] === "success" ? IconSuccess : IconError}
-                  className="SVGInline-svg notification__cross-svg"
-                  alt="Close"
-                />
+        <div class="toast-card_toastWrapper toast-card_shown">
+          <div class="toast-card_toast toast-card_shown">
+            <div class="toast-card-header_toastCardHeader">
+              <span class="toast-card-header_toastCardHeaderIcon">
+                <img src={IconNotification} />
               </span>
+              <span class="toast-card-header_toastCardMessage">Notificaciones!</span>
+              <button class="toast-card-header_toastCardHeaderCloseButton" onClick={handleClose}>
+                <svg xmlns="http://www.w3.org/2000/svg" width="10" height="10" fill="none" viewBox="0 0 10 10">
+                  <path stroke="#fff" stroke-linecap="round" stroke-linejoin="round" stroke-width="1.688" d="M9 1 1 9m0-8 8 8"></path>
+                </svg>
+              </button>
             </div>
+            <div class="toast-card_toastContent"><div class="toast-card_toastDescription">{message[1]}</div></div>
           </div>
         </div>
       )}
