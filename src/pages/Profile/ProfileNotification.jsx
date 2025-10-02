@@ -28,7 +28,7 @@ const ProfileNotification = () => {
 
     return (
         <div className="notifications-content_notifications">
-            <div><h2 className="notifications-content_title">Notifications</h2></div>
+            <div><h2 className="notifications-content_title">Notificaciones</h2></div>
             <div className="notifications-content_subtitleBlock"></div>
             <div className="notifications-content_notificationsList">
                 {

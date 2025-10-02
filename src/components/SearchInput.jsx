@@ -19,7 +19,7 @@ const SearchInput = ({
                             className="input_input"
                             type="text"
                             name="slots-search"
-                            placeholder="Search games (minimum 3 characters)"
+                            placeholder="Buscar juegos (mínimo 3 caracteres)"
                             onChange={(event) => {
                                 setTxtSearch(event.target.value);
                             }}
@@ -31,13 +31,13 @@ const SearchInput = ({
                             value={txtSearch}
                         />
                         <span className="input-wrapper-label_inputWrapperLabel input-wrapper_inputWrapperLabelText">
-                            <span>Search games (minimum 3 characters)</span>
+                            <span>Buscar juegos (mínimo 3 caracteres)</span>
                         </span>
                     </span>
                 </label>
             </div>
             <fieldset className="input-wrapper_inputWrapperFieldset input-wrapper_hasLabel">
-                <legend className="input-wrapper_inputWrapperLegend"><span>Search games (minimum 3 characters)</span></legend>
+                <legend className="input-wrapper_inputWrapperLegend"><span>Buscar juegos (mínimo 3 caracteres)</span></legend>
             </fieldset>
         </div>
     );

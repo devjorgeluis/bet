@@ -13,12 +13,15 @@ const LoginModal = ({ isOpen, onClose, onLoginSuccess }) => {
     const [password, setPassword] = useState("");
     const [showPassword, setShowPassword] = useState(false);
     const [messageCustomAlert, setMessageCustomAlert] = useState("");
+    const [isLoading, setIsLoading] = useState(false);
 
     const handleSubmit = (event) => {
         const form = event.currentTarget;
         event.preventDefault();
         event.stopPropagation();
         if (form.checkValidity()) {
+            setIsLoading(true);
+
             let body = {
                 username: username,
                 password: password,
@@ -34,8 +37,8 @@ const LoginModal = ({ isOpen, onClose, onLoginSuccess }) => {
     };
 
     const callbackSubmitLogin = (result) => {
+        setIsLoading(false);
         if (result.status === "success") {
-            setMessageCustomAlert(["success", "¡Éxito! La sesión ha sido iniciada"]);
             localStorage.setItem("session", JSON.stringify(result));
             updateSession(result);
 
@@ -46,7 +49,7 @@ const LoginModal = ({ isOpen, onClose, onLoginSuccess }) => {
                 onClose();
             }, 1000);
         } else {
-            setMessageCustomAlert(["error", "¡Error! Nombre de usuario o contraseña no válidos"]);
+            setMessageCustomAlert(["error", "Invalid username or password"]);
         }
     };
 
@@ -139,9 +142,12 @@ const LoginModal = ({ isOpen, onClose, onLoginSuccess }) => {
                                     <fieldset className="input-wrapper_inputWrapperFieldset"></fieldset>
                                 </div>
                                 <button className="button_button button_zeusPrimary button_sm login-form_loginFormButton" type="submit">Login
-                                    <span className="button_buttonLoader">
-                                        <svg width="1em" height="1em" fill="currentColor" aria-hidden="true" data-icon="loading" viewBox="0 0 1024 1024"><path d="M988 548c-19.9 0-36-16.1-36-36 0-59.4-11.6-117-34.6-171.3a440.5 440.5 0 0 0-94.3-139.9 437.7 437.7 0 0 0-139.9-94.3C629 83.6 571.4 72 512 72c-19.9 0-36-16.1-36-36s16.1-36 36-36c69.1 0 136.2 13.5 199.3 40.3C772.3 66 827 103 874 150s83.9 101.8 109.7 162.7c26.7 63.1 40.2 130.2 40.2 199.3.1 19.9-16 36-35.9 36"></path></svg>
-                                    </span>
+                                    {
+                                        isLoading && 
+                                        <span className="button_buttonLoader">
+                                            <svg width="1em" height="1em" fill="currentColor" aria-hidden="true" data-icon="loading" viewBox="0 0 1024 1024"><path d="M988 548c-19.9 0-36-16.1-36-36 0-59.4-11.6-117-34.6-171.3a440.5 440.5 0 0 0-94.3-139.9 437.7 437.7 0 0 0-139.9-94.3C629 83.6 571.4 72 512 72c-19.9 0-36-16.1-36-36s16.1-36 36-36c69.1 0 136.2 13.5 199.3 40.3C772.3 66 827 103 874 150s83.9 101.8 109.7 162.7c26.7 63.1 40.2 130.2 40.2 199.3.1 19.9-16 36-35.9 36"></path></svg>
+                                        </span>
+                                    }
                                 </button>
                             </form>
                         </div>

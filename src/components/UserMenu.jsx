@@ -20,44 +20,44 @@ const UserMenu = ({ handleChangePasswordClick, handleLogoutClick, onClose, isSlo
                             <div className="mobile-menu-user_userIcon">{contextData.session.user.username?.charAt(0).toUpperCase()}</div>
                             <div>
                                 <p className="mobile-menu-user_name">{contextData.session.user.username}</p>
-                                <p className="mobile-menu-user_balance">credits {parseFloat(contextData.session.user.balance).toFixed(2) || ''} $</p>
+                                <p className="mobile-menu-user_balance">creditos {parseFloat(contextData.session.user.balance).toFixed(2) || ''} $</p>
                             </div>
                         </div>
                         <div className="mobile-menu-links_linksList">
                             <a className="mobile-menu-links_link" onClick={() => {navigate("/profile"); onClose();}}>
                                 <img className="mobile-menu-links_icon" src={IconProfileCircle} />
-                                <span className="mobile-menu-links_linkText">My data</span>
+                                <span className="mobile-menu-links_linkText">Mis datos</span>
                             </a>
                             <a className="mobile-menu-links_link" onClick={() => {navigate("/profile/history"); onClose();}}>
                                 <img className="mobile-menu-links_icon" src={IconHistory} />
-                                <span className="mobile-menu-links_linkText">History</span>
+                                <span className="mobile-menu-links_linkText">Historial</span>
                             </a>
                             <a className="mobile-menu-links_link" onClick={() => {navigate("/profile/notification"); onClose();}}>
                                 <img className="mobile-menu-links_icon" src={IconNotification} />
-                                <span className="mobile-menu-links_linkText">Notifications</span>
+                                <span className="mobile-menu-links_linkText">Notificaciones</span>
                                 {/* <div className="notifications-counter_notificationsCounter notifications-counter_md">
                                     <span className="notifications-counter_notificationCounter">1</span>
                                 </div> */}
                             </a>
                             <button className="button_button button_ghost button_md mobile-menu-links_link" onClick={handleChangePasswordClick}>
                                 <img className="mobile-menu-links_icon" src={IconPassword} />
-                                <span className="mobile-menu-links_linkText">Change password</span>
+                                <span className="mobile-menu-links_linkText">Cambiar contraseña</span>
                             </button>
                             <button className="button_button button_ghost button_md mobile-menu-links_link" onClick={handleLogoutClick}>
                                 <img className="mobile-menu-links_icon" src={IconLogout} />
-                                <span className="mobile-menu-links_linkText">Log out</span>
+                                <span className="mobile-menu-links_linkText">Cerrar sesión</span>
                             </button>
                         </div>
                     </>
                 }
                 
                 <div className="mobile-menu-navigation_mobileMenuNav">
-                    <a className="mobile-menu-navigation_mobileMenuLink" onClick={() => {navigate("/"); onClose();}}>Home</a>
+                    <a className="mobile-menu-navigation_mobileMenuLink" onClick={() => {navigate("/"); onClose();}}>Inicio</a>
                     <a className="mobile-menu-navigation_mobileMenuLink" onClick={() => {navigate("/casino"); onClose();}}>Casino</a>
                     {
                         isSlotsOnly === "false" && <>
-                            <a className="mobile-menu-navigation_mobileMenuLink" onClick={() => {navigate("/live-casino"); onClose();}}>Live Casino</a>
-                            <a className="mobile-menu-navigation_mobileMenuLink" onClick={() => {navigate("/sports"); onClose();}}>Sport</a>
+                            <a className="mobile-menu-navigation_mobileMenuLink" onClick={() => {navigate("/live-casino"); onClose();}}>Casino en vivo</a>
+                            <a className="mobile-menu-navigation_mobileMenuLink" onClick={() => {navigate("/sports"); onClose();}}>Deportes</a>
                         </>
                     }
                 </div>

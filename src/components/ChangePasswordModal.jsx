@@ -66,7 +66,7 @@ const ChangePasswordModal = ({ onConfirm, onClose }) => {
             <div className="modal-wrapper_modalWrapper modal-wrapper_shown">
                 <div className="modal-wrapper_modalContentWrapper modal-wrapper_hasTitle change-password-modal">
                     <div className="modal-wrapper-title_modalWrapperTitle">
-                        <span>Change Password</span>
+                        <span>Cambiar Contrasena</span>
                         <button onClick={onClose}>
                             <img src={IconClose} />
                         </button>
@@ -82,7 +82,7 @@ const ChangePasswordModal = ({ onConfirm, onClose }) => {
                                             className="input_input"
                                             type={showOldPassword ? "text" : "password"}
                                             name="oldPassword"
-                                            placeholder="Old Password"
+                                            placeholder="Contraseña actual"
                                             autoComplete="old-password"
                                             value={oldPassword}
                                             onChange={(e) => setOldPassword(e.target.value)}
@@ -122,7 +122,7 @@ const ChangePasswordModal = ({ onConfirm, onClose }) => {
                                             className="input_input"
                                             type={showNewPassword ? "text" : "password"}
                                             name="newPassword"
-                                            placeholder="New Password"
+                                            placeholder="Nueva contraseña"
                                             autoComplete="new-password"
                                             value={newPassword}
                                             onChange={(e) => setNewPassword(e.target.value)}
@@ -162,7 +162,7 @@ const ChangePasswordModal = ({ onConfirm, onClose }) => {
                                             className="input_input"
                                             type={showConfirmPassword ? "text" : "password"}
                                             name="confirmPassword"
-                                            placeholder="Confirm New Password"
+                                            placeholder="Repita nueva contraseña"
                                             autoComplete="new-password"
                                             value={confirmPassword}
                                             onChange={(e) => setConfirmPassword(e.target.value)}
@@ -195,10 +195,10 @@ const ChangePasswordModal = ({ onConfirm, onClose }) => {
 
                         <div className="modal-footer_modalFooter mt-0">
                             <button type="button" className="button_button button_zeusPrimary button_md update-password-form_updatePasswordButton" onClick={onClose}>
-                                Cancel
+                                Cancelar
                             </button>
                             <button type="submit" className="button_button button_zeusPrimary button_sm">
-                                Change Password
+                                Cambiar datos y guardar
                                 {isLoading && <img src={IconLoading} width={40} />}
                             </button>
                         </div>

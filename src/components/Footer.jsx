@@ -28,13 +28,13 @@ const Footer = ({ isSlotsOnly }) => {
                                 <a onClick={() => navigate("/")}>
                                     <img alt="" loading="lazy" width="118" height="48" decoding="async"  className="logo_logo" src={ImgLogo} />
                                 </a>
-                                <p>2025 all rights reserved.This site operates under license of Curacao - Netherlands Antilles</p>
+                                <p>2025 Todos los derechos reservados. Sitio Operado bajo Licencia de Curazao - Antillas Holandesas.</p>
                             </div>
                             <div className="footer_headerLinksBlock">
                                 <div className="footer_linksItem">
-                                    <span className="footer_linksItemTitle">SECTIONS</span>
+                                    <span className="footer_linksItemTitle">SECCIONES</span>
                                     <a onClick={() => navigate("/")}>
-                                        <span className={`footer-link_footerLink ${location.pathname === '/' ? 'footer-link_active' : ''}`}>Home</span>
+                                        <span className={`footer-link_footerLink ${location.pathname === '/' ? 'footer-link_active' : ''}`}>Inicio</span>
                                     </a>
                                     <a onClick={() => navigate("/casino")}>
                                         <span className={`footer-link_footerLink ${location.pathname === '/casino' ? 'footer-link_active' : ''}`}>Casino</span>
@@ -42,32 +42,32 @@ const Footer = ({ isSlotsOnly }) => {
                                     {
                                         isSlotsOnly === "false" && <>
                                             <a onClick={() => navigate("/live-casino")}>
-                                                <span className={`footer-link_footerLink ${location.pathname === '/live-casino' ? 'footer-link_active' : ''}`}>Live Casino</span>
+                                                <span className={`footer-link_footerLink ${location.pathname === '/live-casino' ? 'footer-link_active' : ''}`}>Mejor Casino en Vivo</span>
                                             </a>
                                             <a onClick={() => navigate("/sports")}>
-                                                <span className={`footer-link_footerLink ${location.pathname === '/sports' ? 'footer-link_active' : ''}`}>Sport</span>
+                                                <span className={`footer-link_footerLink ${location.pathname === '/sports' ? 'footer-link_active' : ''}`}>Deportes</span>
                                             </a>
                                         </>
                                     }
                                     <a href="/docs/betting-rules.pdf" target="_blank" rel="noopener noreferrer">
-                                        <span className="footer-link_footerLink">Betting Regulations</span>
+                                        <span className="footer-link_footerLink">Reglamento de apuestas</span>
                                     </a>
                                 </div>
                                 <div className="footer_linksItem">
-                                    <span className="footer_linksItemTitle">US</span>
+                                    <span className="footer_linksItemTitle">NOSOTROS</span>
                                     <a href="#" onClick={(e) => { e.preventDefault(); setIsTermsModalOpen(true); }}>
-                                        <span className="footer-link_footerLink">Terms and conditions</span>
+                                        <span className="footer-link_footerLink">Terminos y Condiciones</span>
                                     </a>
                                     <a href="#" onClick={(e) => { e.preventDefault(); setIsPrivacyModalOpen(true); }}>
-                                        <span className="footer-link_footerLink">Privacy Policy</span>
+                                        <span className="footer-link_footerLink">Politica de Privacidad</span>
                                     </a>
                                     <a href="#" onClick={(e) => { e.preventDefault(); setIsResponsibleGamingModalOpen(true); }}>
-                                        <span className="footer-link_footerLink">Responsible gaming</span>
+                                        <span className="footer-link_footerLink">Juego responsable</span>
                                     </a>
                                 </div>
                             </div>
                             <div className="footer_linksItem">
-                                <span className="footer_linksItemTitle">Follow us on our social networks</span>
+                                <span className="footer_linksItemTitle">Síguenos en nuestras redes sociales</span>
                                 <div className="footer_socialLinks">
                                     <a className="footer-social-link_footerSocialLink" onClick={() => navigate("/")}>
                                         <img src={IconFacebook} />
@@ -88,13 +88,13 @@ const Footer = ({ isSlotsOnly }) => {
                                 <div className="footer_forbiddenAgeBlock">
                                     <img src={Icon18} />
                                 </div>
-                                <p className="footer_warningInfo">Exclusive site for people over 18</p>
+                                <p className="footer_warningInfo">Sitio exclusivo para mayores de +18</p>
                             </div>
                             <div className="footer_warningItem">
                                 <div className="footer_warningIcon">
                                     <img alt="gt logo" loading="lazy" width="50" height="50" decoding="async" data-nimg="1" src={IconGt} />
                                 </div>
-                                <p className="footer_warningInfo">Please play responsibly. For more information visit: GamblingTherapy.org</p>
+                                <p className="footer_warningInfo">Por favor, juega responsablemente. Para más información visite: GamblingTherapy.org</p>
                             </div>
                         </div>
                     </div>

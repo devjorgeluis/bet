@@ -45,7 +45,7 @@ const ProfileHistory = () => {
     const [transactions, setTransactions] = useState([]);
     const [loading, setLoading] = useState(false);
     const [showHistory, setShowHistory] = useState(true);
-    const [activeTab, setActiveTab] = useState('operations');
+    const [activeTab, setActiveTab] = useState('operaciones');
     const [pagination, setPagination] = useState({
         start: 0,
         length: 5,
@@ -67,7 +67,7 @@ const ProfileHistory = () => {
     const CustomFromInput = () => (
         <button className="date-picker-wrapper_datePickerButton" onClick={() => setShowFromCalendar(!showFromCalendar)}>
             <span className="date-picker-wrapper_datePickerButtonContent date-picker-wrapper_hasValue">
-                <span className="date-picker-wrapper_datePickerButtonLabel">From</span><span className="date-picker-wrapper_datePickerButtonValue">{formatDate(filters.dateFrom)}</span>
+                <span className="date-picker-wrapper_datePickerButtonLabel">Desde</span><span className="date-picker-wrapper_datePickerButtonValue">{formatDate(filters.dateFrom)}</span>
             </span>
             <span className="date-picker-wrapper_datePickerButtonArrow">
                 <img src={IconChevronLeft} />
@@ -78,7 +78,7 @@ const ProfileHistory = () => {
     const CustomToInput = () => (
         <button className="date-picker-wrapper_datePickerButton" onClick={() => setShowToCalendar(!showToCalendar)}>
             <span className="date-picker-wrapper_datePickerButtonContent date-picker-wrapper_hasValue">
-                <span className="date-picker-wrapper_datePickerButtonLabel">To</span><span className="date-picker-wrapper_datePickerButtonValue">{formatDate(filters.dateTo)}</span>
+                <span className="date-picker-wrapper_datePickerButtonLabel">Hasta</span><span className="date-picker-wrapper_datePickerButtonValue">{formatDate(filters.dateTo)}</span>
             </span>
             <span className="date-picker-wrapper_datePickerButtonArrow">
                 <img src={IconChevronLeft} />
@@ -240,14 +240,10 @@ const ProfileHistory = () => {
     const handleNextPage = () => handlePageChange(pagination.currentPage + 1);
     const handleLastPage = () => handlePageChange(totalPages);
 
-    const handleBack = () => {
-        navigate(-1);
-    };
-
     return (
         <>
             <div className="history-content_historyLayout">
-                <h2 className="history-content_pageTitle">History</h2>
+                <h2 className="history-content_pageTitle">Historial</h2>
                 <div className="history-content_historyLayoutContent">
                     <div className="history-content_tabsWrapper">
                         <div>
@@ -256,7 +252,7 @@ const ProfileHistory = () => {
                                     className={`tabs_tabsItem ${activeTab === 'operations' ? 'tabs_active' : 'tabs_inActive'}`}
                                     onClick={() => handleTabChange('operations')}
                                 >
-                                    Operations
+                                    Operaciones
                                 </button>
                                 <button
                                     className={`tabs_tabsItem ${activeTab === 'casino' ? 'tabs_active' : 'tabs_inActive'}`}
@@ -311,7 +307,7 @@ const ProfileHistory = () => {
                         <div className="history-content_historyLayoutFilters">
                             <div className="history-content_historyLayoutFiltersHeader">
                                 <button className="button_button button_ghost button_md history-content_filtersVisibilityBtn" onClick={() => setShowHistory(!showHistory)}>
-                                    {showHistory ? "Hide" : "Show"} filters
+                                    {showHistory ? "Ocultar" : "Mostrar"} filtros
                                     <img src={IconFilter} />
                                 </button>
                             </div>
@@ -334,7 +330,7 @@ const ProfileHistory = () => {
                                                                 <span className="check-box-desktop__checkmark"></span>
                                                             </label>
                                                         </div>
-                                                        <label className="select-multi-desktop__item-value" htmlFor="all-checkbox">All</label>
+                                                        <label className="select-multi-desktop__item-value" htmlFor="all-checkbox">Todos</label>
                                                     </li>
                                                     <li className="select-multi-desktop__item">
                                                         <div className="select-multi-desktop__checkbox">
@@ -349,7 +345,7 @@ const ProfileHistory = () => {
                                                                 <span className="check-box-desktop__checkmark"></span>
                                                             </label>
                                                         </div>
-                                                        <label className="select-multi-desktop__item-value" htmlFor="win-checkbox">Win</label>
+                                                        <label className="select-multi-desktop__item-value" htmlFor="win-checkbox">Ganado</label>
                                                     </li>
                                                     <li className="select-multi-desktop__item">
                                                         <div className="select-multi-desktop__checkbox">
@@ -364,7 +360,7 @@ const ProfileHistory = () => {
                                                                 <span className="check-box-desktop__checkmark"></span>
                                                             </label>
                                                         </div>
-                                                        <label className="select-multi-desktop__item-value" htmlFor="lost-checkbox">Lost</label>
+                                                        <label className="select-multi-desktop__item-value" htmlFor="lost-checkbox">Perdido</label>
                                                     </li>
                                                 </ul>
                                             </>
@@ -401,7 +397,7 @@ const ProfileHistory = () => {
                                             className="button_button button_zeusPrimary button_md history-operations-filters_filtersSubmitBtn"
                                             onClick={() => handleSubmit()}
                                         >
-                                            Search
+                                            Mostrar resultado
                                         </button>
                                     </div>
                                 </div>
@@ -415,11 +411,11 @@ const ProfileHistory = () => {
                                     <table className="table_table">
                                         <thead>
                                             <tr>
-                                                <td className="table_tableHeadCell" align="left">Date</td>
+                                                <td className="table_tableHeadCell" align="left">Fecha</td>
                                                 <td className="table_tableHeadCell" align="left">Type</td>
-                                                <td className="table_tableHeadCell" align="left">Balance before</td>
-                                                <td className="table_tableHeadCell" align="left">Balance after</td>
-                                                <td className="table_tableHeadCell" align="left">Amount</td>
+                                                <td className="table_tableHeadCell" align="left">Saldo antes</td>
+                                                <td className="table_tableHeadCell" align="left">Saldo después</td>
+                                                <td className="table_tableHeadCell" align="left">Cantidad</td>
                                             </tr>
                                         </thead>
                                         <tbody>
@@ -438,12 +434,12 @@ const ProfileHistory = () => {
                                     <table className="table_table">
                                         <thead>
                                             <tr>
-                                                <td className="table_tableHeadCell" align="left">Date</td>
-                                                <td className="table_tableHeadCell" align="left">Provider</td>
-                                                <td className="table_tableHeadCell" align="left">Balance before</td>
-                                                <td className="table_tableHeadCell" align="left">Balance after</td>
-                                                <td className="table_tableHeadCell" align="left">Bet</td>
-                                                <td className="table_tableHeadCell" align="left">Result</td>
+                                                <td className="table_tableHeadCell" align="left">Fecha</td>
+                                                <td className="table_tableHeadCell" align="left">Proveedor</td>
+                                                <td className="table_tableHeadCell" align="left">Saldo antes</td>
+                                                <td className="table_tableHeadCell" align="left">Saldo después</td>
+                                                <td className="table_tableHeadCell" align="left">Monto</td>
+                                                <td className="table_tableHeadCell" align="left">Resultado</td>
                                             </tr>
                                         </thead>
                                         <tbody>

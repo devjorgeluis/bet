@@ -25,7 +25,7 @@ let pageCurrent = 0;
 
 
 const LiveCasino = () => {
-  const pageTitle = "Live Casino";
+  const pageTitle = "Mejor Casino en Vivo";
   const { contextData } = useContext(AppContext);
   const { isLogin } = useContext(LayoutContext);
   const { setShowFullDivLoading } = useContext(NavigationContext);
@@ -426,14 +426,14 @@ const LiveCasino = () => {
           {!isLoadingGames && games.length >= 20 && (
             <div className="games-cards-suspensed_seeMoreWrapper">
               <a onClick={loadMoreContent}>
-                <button className="button_button button_zeusPrimary button_md">See more</button>
+                <button className="button_button button_zeusPrimary button_md">Ver más</button>
               </a>
             </div>
           )}
           {!isLoadingGames && games.length === 0 && (
             <div className="not-found-view_notFoundView">
               <div className="not-found-view_notFoundViewContent">
-                We looked everywhere, <br /> but found nothing.
+                Buscamos por todas partes, <br /> pero no encontramos nada.
               </div>
             </div>
           )}

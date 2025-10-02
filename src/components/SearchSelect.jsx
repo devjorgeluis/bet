@@ -47,7 +47,7 @@ const SearchSelect = ({
                             )}
                             <span className="select_selectorLabel">
                                 <span className="select_selectorLabelCurrentLabel">
-                                    {selectedProvider ? selectedProvider.name : "All Providers"}
+                                    {selectedProvider ? selectedProvider.name : "Todos los proveedores"}
                                 </span>
                             </span>
                             {selectedProvider && selectedProvider.id ?
@@ -90,13 +90,13 @@ const SearchSelect = ({
                             ))}
                         </div>
                         <span className="input-wrapper-label_inputWrapperLabel input-wrapper_inputWrapperLabelText">
-                            <span>Provider</span>
+                            <span>Proveedor</span>
                         </span>
                     </span>
                 </label>
             </div>
             <fieldset className="input-wrapper_inputWrapperFieldset input-wrapper_hasLabel">
-                <legend className="input-wrapper_inputWrapperLegend"><span>Provider</span></legend>
+                <legend className="input-wrapper_inputWrapperLegend"><span>Proveedor</span></legend>
             </fieldset>
         </div>
     );

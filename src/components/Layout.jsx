@@ -88,7 +88,7 @@ const Layout = () => {
             setFragmentNavLinksTop(
                 <>
                     <NavLinkHeader
-                        title="Home"
+                        title="Inicio"
                         pageCode="home"
                         icon=""
                     />
@@ -98,12 +98,12 @@ const Layout = () => {
                         icon=""
                     />
                     <NavLinkHeader
-                        title="Live Casino"
+                        title="Mejor Casino en Vivo"
                         pageCode="live-casino"
                         icon=""
                     />
                     <NavLinkHeader
-                        title="Sport"
+                        title="Deportes"
                         pageCode="sports"
                         icon=""
                     />
@@ -114,7 +114,7 @@ const Layout = () => {
             setFragmentNavLinksTop(
                 <>
                     <NavLinkHeader
-                        title="Home"
+                        title="Inicio"
                         pageCode="home"
                         icon=""
                     />

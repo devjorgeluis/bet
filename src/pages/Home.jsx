@@ -72,8 +72,8 @@ const Home = () => {
 
   const promos = [
     { name: "Casino", link: "/casino", image: ImgPromoCasino },
-    { name: "Live Casino", link: "/live-casino", image: ImgPromoLiveCasino },
-    { name: "Sports", link: "/sports", image: ImgPromoSport }
+    { name: "Mejor Casino en Vivo", link: "/live-casino", image: ImgPromoLiveCasino },
+    { name: "Deportes", link: "/sports", image: ImgPromoSport }
   ]
 
   useEffect(() => {
@@ -110,7 +110,7 @@ const Home = () => {
 
   useEffect(() => {
     updateNavLinks();
-  }, [selectedPage]);
+  }, [selectedPage, isSlotsOnly]);
 
   const getStatus = () => {
     callApi(contextData, "GET", "/get-status", callbackGetStatus, null);
@@ -142,7 +142,7 @@ const Home = () => {
             onClick={() => getSubPage("hot")}
           />
           <NavLinkIcon
-            title="Habilidad"
+            title="Juegos de crash"
             pageCode="arcade"
             icon={ImgCrash}
             active={selectedPage === "arcade"}
@@ -156,7 +156,7 @@ const Home = () => {
             onClick={() => getSubPage("megaways")}
           />
           <NavLinkIcon
-            title="Ruleta"
+            title="Ruletas"
             pageCode="roulette"
             icon={ImgRoulette}
             active={selectedPage === "roulette"}
@@ -536,7 +536,7 @@ const Home = () => {
           <div className="top-games">
             <div className="games-block-title_gamesBlockTitle">
               <div className="games-block-title_gamesBlockTitleSeparator games-block-title_gamesBlockTitleLeft"></div>
-              <p className="games-block-title_gamesBlockTitleText">Top Games</p>
+              <p className="games-block-title_gamesBlockTitleText">Tragamonedas Destacadas</p>
               <div className="games-block-title_gamesBlockTitleSeparator games-block-title_gamesBlockTitleRight"></div>
             </div>
             <div className="games-cards-suspensed_gameCardWrapper">
@@ -587,7 +587,7 @@ const Home = () => {
             {isLoadingGames && <GamesLoading />}
             <div className="games-cards-suspensed_seeMoreWrapper">
               <a onClick={() => navigate("/casino")}>
-                <button className="button_button button_zeusPrimary button_md">See More</button>
+                <button className="button_button button_zeusPrimary button_md">Ver más</button>
               </a>
             </div>
           </div>
@@ -598,7 +598,7 @@ const Home = () => {
                 isSlotsOnly === "false" && <div className="live-casino">
                   <div className="games-block-title_gamesBlockTitle">
                     <div className="games-block-title_gamesBlockTitleSeparator games-block-title_gamesBlockTitleLeft"></div>
-                    <p className="games-block-title_gamesBlockTitleText">Live Casino</p>
+                    <p className="games-block-title_gamesBlockTitleText">Mejor Casino en Vivo</p>
                     <div className="games-block-title_gamesBlockTitleSeparator games-block-title_gamesBlockTitleRight"></div>
                   </div>
                   <div className="games-cards-suspensed_gameCardWrapper">
@@ -628,7 +628,7 @@ const Home = () => {
                   {isLoadingGames && <GamesLoading />}
                   <div className="games-cards-suspensed_seeMoreWrapper">
                     <a onClick={() => navigate("/live-casino")}>
-                      <button className="button_button button_zeusPrimary button_md">See More</button>
+                      <button className="button_button button_zeusPrimary button_md">Ver más</button>
                     </a>
                   </div>
                 </div>
