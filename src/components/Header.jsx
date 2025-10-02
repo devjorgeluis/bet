@@ -64,7 +64,8 @@ const Header = ({ isLogin, userBalance, handleLoginClick, handleLogoutClick, han
             {showUserMenu && <UserMenu 
                 handleChangePasswordClick={() => {handleChangePasswordClick(); onClose();}} 
                 handleLogoutClick={() => {handleLogoutClick(); onClose();}} 
-                onClose={onClose} 
+                onClose={onClose}
+                isSlotsOnly={isSlotsOnly}
             />}
         </>
     );

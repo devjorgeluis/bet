@@ -7,7 +7,7 @@ import IconNotification from "/src/assets/svg/notification.svg";
 import IconPassword from "/src/assets/svg/password.svg";
 import IconLogout from "/src/assets/svg/logout.svg";
 
-const UserMenu = ({ handleChangePasswordClick, handleLogoutClick, onClose }) => {
+const UserMenu = ({ handleChangePasswordClick, handleLogoutClick, onClose, isSlotsOnly }) => {
     const navigate = useNavigate();
     const { contextData } = useContext(AppContext);
 
@@ -54,8 +54,12 @@ const UserMenu = ({ handleChangePasswordClick, handleLogoutClick, onClose }) => 
                 <div className="mobile-menu-navigation_mobileMenuNav">
                     <a className="mobile-menu-navigation_mobileMenuLink" onClick={() => {navigate("/"); onClose();}}>Home</a>
                     <a className="mobile-menu-navigation_mobileMenuLink" onClick={() => {navigate("/casino"); onClose();}}>Casino</a>
-                    <a className="mobile-menu-navigation_mobileMenuLink" onClick={() => {navigate("/live-casino"); onClose();}}>Live Casino</a>
-                    <a className="mobile-menu-navigation_mobileMenuLink" onClick={() => {navigate("/sports"); onClose();}}>Sport</a>
+                    {
+                        isSlotsOnly === "false" && <>
+                            <a className="mobile-menu-navigation_mobileMenuLink" onClick={() => {navigate("/live-casino"); onClose();}}>Live Casino</a>
+                            <a className="mobile-menu-navigation_mobileMenuLink" onClick={() => {navigate("/sports"); onClose();}}>Sport</a>
+                        </>
+                    }
                 </div>
             </div>
         </div>

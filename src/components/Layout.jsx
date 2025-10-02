@@ -213,7 +213,7 @@ const Layout = () => {
                             isSlotsOnly={isSlotsOnly}
                         />
                         <main className="app__main">
-                            <Outlet />
+                            <Outlet context={{ isSlotsOnly }} />
                         </main>
                         {
                             isMobile && !isSportsPage ? <Footer isSlotsOnly={isSlotsOnly} isSportsPage={isSportsPage} /> :

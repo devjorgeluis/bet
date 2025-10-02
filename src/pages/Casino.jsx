@@ -1,5 +1,5 @@
 import { useContext, useState, useEffect, useRef } from "react";
-import { useNavigate, useLocation } from "react-router-dom";
+import { useNavigate, useLocation, useOutletContext } from "react-router-dom";
 import { AppContext } from "../AppContext";
 import { LayoutContext } from "../components/LayoutContext";
 import { NavigationContext } from "../components/NavigationContext";
@@ -58,6 +58,7 @@ const Casino = () => {
   const navigate = useNavigate();
   const location = useLocation();
   const searchRef = useRef(null);
+  const { isSlotsOnly } = useOutletContext();
 
   let imageSlideshow = isMobile ? [ImgMobileBanner1] : [ImgBanner1];
 
@@ -98,7 +99,7 @@ const Casino = () => {
   }, [selectedPage]);
 
   const updateNavLinks = () => {
-    if ((contextData.slots_only == null) || (contextData.slots_only == false)) {
+    if (isSlotsOnly === "false") {
       setFragmentNavLinksBody(
         <>
           <NavLinkIcon
