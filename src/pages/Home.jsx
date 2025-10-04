@@ -17,11 +17,11 @@ import LoginModal from "../components/LoginModal";
 import CustomAlert from "../components/CustomAlert";
 import "animate.css";
 import ImgBanner1 from "/src/assets/img/slots.avif";
-import ImgBanner2 from "/src/assets/img/live-casino.avif";
-import ImgBanner3 from "/src/assets/img/sport.avif";
+import ImgBanner2 from "/src/assets/img/sport.avif";
+import ImgBanner3 from "/src/assets/img/live-casino.avif";
 import ImgMobileBanner1 from "/src/assets/img/mobile-slots.avif";
-import ImgMobileBanner2 from "/src/assets/img/mobile-live-casino.avif";
-import ImgMobileBanner3 from "/src/assets/img/mobile-sport.avif";
+import ImgMobileBanner2 from "/src/assets/img/mobile-sport.avif";
+import ImgMobileBanner3 from "/src/assets/img/mobile-live-casino.avif";
 
 import ImgLobby from "/src/assets/img/lobby.avif";
 import ImgJoker from "/src/assets/img/jokers.avif";
