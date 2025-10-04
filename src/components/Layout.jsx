@@ -98,7 +98,7 @@ const Layout = () => {
                         icon=""
                     />
                     <NavLinkHeader
-                        title="Mejor Casino en Vivo"
+                        title="Casino en Vivo"
                         pageCode="live-casino"
                         icon=""
                     />
@@ -136,12 +136,6 @@ const Layout = () => {
         setUserBalance(balance);
     };
 
-    const handleLoginConfirm = () => {
-        setIsLogin(true);
-        refreshBalance();
-        setShowLoginModal(false);
-    };
-
     const handleLogoutClick = () => {
         setShowLogoutModal(true);
     };
@@ -161,10 +155,6 @@ const Layout = () => {
                 setShowLogoutModal(false);
             }
         }, null);
-    };
-
-    const handleChangePasswordConfirm = () => {
-        setShowLogoutModal(false);
     };
 
     const layoutContextValue = {
@@ -198,7 +188,6 @@ const Layout = () => {
                     )}
                     {showChangePasswordModal && (
                         <ChangePasswordModal 
-                            onConfirm={handleChangePasswordConfirm} 
                             onClose={() => setShowChangePasswordModal(false)}
                         />
                     )}

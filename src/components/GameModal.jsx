@@ -174,7 +174,7 @@ const GameModal = (props) => {
         {
           !isFullscreen && <div className="games-block-title_gamesBlockTitle">
             <div className="games-block-title_gamesBlockTitleSeparator games-block-title_gamesBlockTitleLeft"></div>
-            <p className="games-block-title_gamesBlockTitleText">Joker's Jewels</p>
+            <p className="games-block-title_gamesBlockTitleText">{props.gameName || "Joker's Jewels"}</p>
             <div className="games-block-title_gamesBlockTitleSeparator games-block-title_gamesBlockTitleRight"></div>
           </div>
         }

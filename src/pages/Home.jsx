@@ -36,6 +36,7 @@ import ImgPromoSport from "/src/assets/img/sport-promo.avif";
 let selectedGameId = null;
 let selectedGameType = null;
 let selectedGameLauncher = null;
+let selectedGameName = null;
 let pageCurrent = 0;
 
 const Home = () => {
@@ -98,6 +99,7 @@ const Home = () => {
     selectedGameId = null;
     selectedGameType = null;
     selectedGameLauncher = null;
+    selectedGameName = null;
     setGameUrl("");
     setShouldShowGameModal(false);
 
@@ -351,12 +353,13 @@ const Home = () => {
     });
   };
 
-  const launchGame = (id, type, launcher) => {
+  const launchGame = (game, type, launcher) => {
     setShouldShowGameModal(true);
     setShowFullDivLoading(true);
-    selectedGameId = id !== null ? id : selectedGameId;
+    selectedGameId = game.id !== null ? game.id : selectedGameId;
     selectedGameType = type !== null ? type : selectedGameType;
     selectedGameLauncher = launcher !== null ? launcher : selectedGameLauncher;
+    selectedGameName = game?.name;
     callApi(contextData, "GET", "/get-game-url?game_id=" + selectedGameId, callbackLaunchGame, null);
   };
 
@@ -378,6 +381,7 @@ const Home = () => {
     selectedGameId = null;
     selectedGameType = null;
     selectedGameLauncher = null;
+    selectedGameName = null;
     setGameUrl("");
     setShouldShowGameModal(false);
   };
@@ -481,6 +485,7 @@ const Home = () => {
       {shouldShowGameModal && selectedGameId !== null ? (
         <GameModal
           gameUrl={gameUrl}
+          gameName={selectedGameName}
           reload={launchGame}
           launchInNewTab={() => launchGame(null, null, "tab")}
           ref={refGameModal}
@@ -555,7 +560,7 @@ const Home = () => {
                         imageSrc={imageDataSrc}
                         onClick={() =>
                           isLogin
-                            ? launchGame(item.id, "slot", "tab")
+                            ? launchGame(item, "slot", "tab")
                             : handleLoginClick()
                         }
                       />
@@ -576,7 +581,7 @@ const Home = () => {
                         imageSrc={imageDataSrc}
                         onClick={() =>
                           isLogin
-                            ? launchGame(item.id, "slot", "tab")
+                            ? launchGame(item, "slot", "tab")
                             : handleLoginClick()
                         }
                       />
@@ -617,7 +622,7 @@ const Home = () => {
                               imageSrc={imageDataSrc}
                               onClick={() =>
                                 isLogin
-                                  ? launchGame(item.id, "slot", "tab")
+                                  ? launchGame(item, "slot", "tab")
                                   : handleLoginClick()
                               }
                             />

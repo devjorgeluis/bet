@@ -8,7 +8,7 @@ const GameCard = (props) => {
           <span className="game-card-content_gameCardContent game-card_gameCardContent">
             <div className="game-card-content_gameCardContentLabel">{props.title}</div>
             <span className="game-card-content_gameCardContentInner game-card_gameCardPlayContentInner">
-              <button className="button_button button_zeusPrimary button_xs game-card-content_gameCardPlayButton">Play</button>
+              <button className="button_button button_zeusPrimary button_xs game-card-content_gameCardPlayButton">Jugar</button>
             </span>
           </span>
         </div>

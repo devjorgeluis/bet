@@ -7,7 +7,7 @@ import IconEye from "/src/assets/svg/eye.svg";
 import IconEyeSlash from "/src/assets/svg/eye-slash.svg";
 import IconLoading from "/src/assets/svg/loading.svg";
 
-const ChangePasswordModal = ({ onConfirm, onClose }) => {
+const ChangePasswordModal = ({ onClose }) => {
     const { contextData } = useContext(AppContext);
     const [isLoading, setIsLoading] = useState(false);
     const [oldPassword, setOldPassword] = useState("");
@@ -28,11 +28,6 @@ const ChangePasswordModal = ({ onConfirm, onClose }) => {
             return;
         }
 
-        if (oldPassword === newPassword) {
-            setMessageCustomAlert(["error", "La contraseña antigua y la nueva no deben ser iguales."]);
-            return;
-        }
-
         if (newPassword === "" || confirmPassword === "" || oldPassword === "") {
             setMessageCustomAlert(["error", "La contraseña no puede quedar en blanco."]);
             return;
@@ -41,8 +36,8 @@ const ChangePasswordModal = ({ onConfirm, onClose }) => {
         if (form.checkValidity()) {
             setIsLoading(true);
             let body = {
-                oldPassword: oldPassword,
-                newPassword: newPassword,
+                "old_password": oldPassword,
+                "new_password": newPassword,
             };
             callApi(
                 contextData,
@@ -56,11 +51,11 @@ const ChangePasswordModal = ({ onConfirm, onClose }) => {
 
     const callbackSubmitChangePassword = (result) => {
         setIsLoading(false);
-        if (result.status === "success") {
+        if (result.status === "0") {
             setMessageCustomAlert(["success", "Tu contraseña se ha cambiado y ha sido copiada."]);
             setTimeout(() => {
                 onClose();
-            }, 1500);
+            }, 2000);
         } else {
             setMessageCustomAlert(["error", result.message || "Error ..."]);
         }
@@ -204,7 +199,7 @@ const ChangePasswordModal = ({ onConfirm, onClose }) => {
                             </button>
                             <button type="submit" className="button_button button_zeusPrimary button_sm">
                                 Cambiar datos y guardar
-                                {isLoading && <img src={IconLoading} width={40} />}
+                                {isLoading && <img src={IconLoading} width={35} />}
                             </button>
                         </div>
                     </form>

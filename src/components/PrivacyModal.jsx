@@ -21,7 +21,7 @@ const PrivacyModal = ({ isOpen, onClose }) => {
         <div className="modal-wrapper_modalWrapper modal-wrapper_shown">
             <div className="modal-wrapper_modalContentWrapper modal-wrapper_hasTitle general-modal">
                 <div className="modal-wrapper-title_modalWrapperTitle">
-                    <span>Privacy Policy</span>
+                    <span>Politica de Privacidad</span>
                     <button onClick={onClose}>
                         <img src={IconClose} />
                     </button>
@@ -32,7 +32,7 @@ const PrivacyModal = ({ isOpen, onClose }) => {
                     </div>
                 </div>
                 <div className="modal-footer_modalFooter">
-                    <button className="button_button button_zeusPrimary button_md modal-close-button_modalCloseButton" onClick={onClose}>Close</button>
+                    <button className="button_button button_zeusPrimary button_md modal-close-button_modalCloseButton" onClick={onClose}>Cerrar</button>
                 </div>
             </div>
         </div>

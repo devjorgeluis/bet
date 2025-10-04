@@ -303,7 +303,7 @@
 }
 
 .games-cards-suspensed_gameCardWrapper {
-    padding: 0 20px
+    padding: 0 10px
 }
 
 @media(max-width: 1600px) {
@@ -2571,12 +2571,14 @@
     top: calc(100% + 10px);
     opacity: 0;
     transform: translateY(20px);
-    transition: all .1s linear
+    transition: all .1s linear;
+    height: 0;
 }
 
 .select-options_selectOptions.select-options_shown {
     opacity: 1;
-    transform: translateY(0)
+    transform: translateY(0);
+    height: auto;
 }
 
 .select-options_selectOptions::-webkit-scrollbar {

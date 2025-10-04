@@ -67,7 +67,7 @@ const LoginModal = ({ isOpen, onClose, onLoginSuccess }) => {
             <div className="modal-wrapper_modalWrapper modal-wrapper_shown">
                 <div className="modal-wrapper_modalContentWrapper modal-wrapper_hasTitle login-modal">
                     <div className="modal-wrapper-title_modalWrapperTitle">
-                        <span>Acceso</span>
+                        <span>Acceder</span>
                         <button onClick={onClose}>
                             <img src={IconClose} />
                         </button>
@@ -141,7 +141,7 @@ const LoginModal = ({ isOpen, onClose, onLoginSuccess }) => {
                                     </div>
                                     <fieldset className="input-wrapper_inputWrapperFieldset"></fieldset>
                                 </div>
-                                <button className="button_button button_zeusPrimary button_sm login-form_loginFormButton" type="submit">Acceso
+                                <button className="button_button button_zeusPrimary button_sm login-form_loginFormButton" type="submit">Acceder
                                     {
                                         isLoading && 
                                         <span className="button_buttonLoader">

@@ -47,7 +47,7 @@ const MobileFooter = ({ isSlotsOnly }) => {
                     <img className="main-mobile-menu__menu-active" src={ImgActive} alt="" />
                     <div className="main-mobile-menu__menu-icon-container">
                         <span className="SVGInline main-mobile-menu__menu-icon">
-                            <img className="SVGInline-svg main-mobile-menu__menu-icon-svg" src={IconLiveCasino} alt="Mejor Casino en Vivo" />
+                            <img className="SVGInline-svg main-mobile-menu__menu-icon-svg" src={IconLiveCasino} alt="Casino en Vivo" />
                         </span>
                     </div>
                     <span className="main-mobile-menu__menu-text">Casino en vivo</span>

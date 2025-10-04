@@ -1,5 +1,5 @@
 import { useContext, useState, useEffect, useRef } from "react";
-import { useNavigate, useLocation, useOutletContext } from "react-router-dom";
+import { useLocation, useOutletContext } from "react-router-dom";
 import { AppContext } from "../AppContext";
 import { LayoutContext } from "../components/LayoutContext";
 import { NavigationContext } from "../components/NavigationContext";
@@ -28,6 +28,7 @@ import ImgRoulette from "/src/assets/img/roulette.webp";
 let selectedGameId = null;
 let selectedGameType = null;
 let selectedGameLauncher = null;
+let selectedGameName = null;
 let pageCurrent = 0;
 
 
@@ -55,7 +56,6 @@ const Casino = () => {
   const [messageCustomAlert, setMessageCustomAlert] = useState(["", ""]);
   const [shouldShowGameModal, setShouldShowGameModal] = useState(false);
   const refGameModal = useRef();
-  const navigate = useNavigate();
   const location = useLocation();
   const searchRef = useRef(null);
   const { isSlotsOnly } = useOutletContext();
@@ -84,6 +84,7 @@ const Casino = () => {
     selectedGameId = null;
     selectedGameType = null;
     selectedGameLauncher = null;
+    selectedGameName = null;
     setGameUrl("");
     setShouldShowGameModal(false);
 
@@ -327,12 +328,13 @@ const Casino = () => {
     });
   };
 
-  const launchGame = (id, type, launcher) => {
+  const launchGame = (game, type, launcher) => {
     setShouldShowGameModal(true);
     setShowFullDivLoading(true);
-    selectedGameId = id != null ? id : selectedGameId;
+    selectedGameId = game.id != null ? game.id : selectedGameId;
     selectedGameType = type != null ? type : selectedGameType;
     selectedGameLauncher = launcher != null ? launcher : selectedGameLauncher;
+    selectedGameName = game?.name;
     callApi(contextData, "GET", "/get-game-url?game_id=" + selectedGameId, callbackLaunchGame, null);
   };
 
@@ -354,6 +356,7 @@ const Casino = () => {
     selectedGameId = null;
     selectedGameType = null;
     selectedGameLauncher = null;
+    selectedGameName = null;
     setGameUrl("");
     setShouldShowGameModal(false);
   };
@@ -463,6 +466,7 @@ const Casino = () => {
       {shouldShowGameModal && selectedGameId !== null ? (
         <GameModal
           gameUrl={gameUrl}
+          gameName={selectedGameName}
           reload={launchGame}
           launchInNewTab={() => launchGame(null, null, "tab")}
           ref={refGameModal}
@@ -515,11 +519,13 @@ const Casino = () => {
           </div>
 
           <div className="active-games">
-            <div className="games-block-title_gamesBlockTitle">
-              <div className="games-block-title_gamesBlockTitleSeparator games-block-title_gamesBlockTitleLeft"></div>
-              <p className="games-block-title_gamesBlockTitleText">Tragamonedas Destacadas</p>
-              <div className="games-block-title_gamesBlockTitleSeparator games-block-title_gamesBlockTitleRight"></div>
-            </div>
+            {
+              txtSearch === "" && <div className="games-block-title_gamesBlockTitle">
+                <div className="games-block-title_gamesBlockTitleSeparator games-block-title_gamesBlockTitleLeft"></div>
+                <p className="games-block-title_gamesBlockTitleText">Tragamonedas Destacadas</p>
+                <div className="games-block-title_gamesBlockTitleSeparator games-block-title_gamesBlockTitleRight"></div>
+              </div>
+            }
 
             <div className="games-cards-suspensed_gameCardWrapper">
               <div className="grid_grid grid_sm grid_rowMax3 games-cards-suspensed_gameCardListClassName">
@@ -537,7 +543,7 @@ const Casino = () => {
                         imageSrc={imageDataSrc}
                         onClick={() =>
                           isLogin
-                            ? launchGame(item.id, "slot", "tab")
+                            ? launchGame(item, "slot", "tab")
                             : handleLoginClick()
                         }
                       />

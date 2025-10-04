@@ -45,7 +45,7 @@ const ProfileHistory = () => {
     const [transactions, setTransactions] = useState([]);
     const [loading, setLoading] = useState(false);
     const [showHistory, setShowHistory] = useState(true);
-    const [activeTab, setActiveTab] = useState('operaciones');
+    const [activeTab, setActiveTab] = useState('operations');
     const [pagination, setPagination] = useState({
         start: 0,
         length: 5,
