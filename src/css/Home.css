@@ -1220,7 +1220,9 @@
 }
 
 .logo_logo {
-    object-fit: contain
+    width: 140px;
+    height: 40px;
+    object-fit: contain;
 }
 
 .game-card-content_gameCardContent {
@@ -2424,8 +2426,9 @@
 
 .header_headerLeftContent img {
     padding-top: 4px;
-    width: 118px;
-    height: 48px;
+    width: 140px;
+    height: 40px;
+    object-fit: contain;
 }
 
 .header_headerLinks {
