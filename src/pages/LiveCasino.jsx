@@ -3,7 +3,7 @@ import { useLocation } from "react-router-dom";
 import { AppContext } from "../AppContext";
 import { LayoutContext } from "../components/LayoutContext";
 import { NavigationContext } from "../components/NavigationContext";
-import { callApi, callApiService } from "../utils/Utils";
+import { callApi } from "../utils/Utils";
 import GameCard from "/src/components/GameCard";
 import Slideshow from "../components/Slideshow";
 import CategorySlideshow from "../components/CategorySlideshow";
@@ -157,7 +157,7 @@ const LiveCasino = () => {
     setSelectedCategoryIndex(categoryIndex);
     setTxtSearch("");
 
-    let apiUrl = "/games/?page_group_type=categories&page_group_code=" +
+    let apiUrl = "/get-content?page_group_type=categories&page_group_code=" +
       pageData.page_group_code +
       "&table_name=" +
       tableName +
@@ -172,7 +172,7 @@ const LiveCasino = () => {
       apiUrl += "&provider=" + selectedProvider.id;
     }
 
-    callApiService(
+    callApi(
       contextData,
       "GET",
       apiUrl,
@@ -187,10 +187,10 @@ const LiveCasino = () => {
     } else {
       if (pageCurrent == 0) {
         configureImageSrc(result);
-        setGames(result.data);
+        setGames(result.content);
       } else {
         configureImageSrc(result);
-        setGames([...games, ...result.data]);
+        setGames([...games, ...result.content]);
       }
       pageCurrent += 1;
     }
@@ -198,7 +198,7 @@ const LiveCasino = () => {
   };
 
   const configureImageSrc = (result) => {
-    (result.data || []).forEach((element) => {
+    (result.content || []).forEach((element) => {
       let imageDataSrc = element.image_url;
       if (element.image_local != null) {
         imageDataSrc = contextData.cdnUrl + element.image_local;
