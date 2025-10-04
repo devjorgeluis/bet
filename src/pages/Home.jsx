@@ -3,7 +3,7 @@ import { useNavigate, useLocation, useOutletContext } from "react-router-dom";
 import { AppContext } from "../AppContext";
 import { LayoutContext } from "../components/LayoutContext";
 import { NavigationContext } from "../components/NavigationContext";
-import { callApi, callApiService } from "../utils/Utils";
+import { callApi } from "../utils/Utils";
 import GameCard from "/src/components/GameCard";
 import NavLinkIcon from "../components/NavLinkIcon";
 import Slideshow from "../components/Slideshow";
@@ -309,10 +309,10 @@ const Home = () => {
 
     const groupCode = pageGroupCode || pageData.page_group_code;
 
-    callApiService(
+    callApi(
       contextData,
       "GET",
-      "/games/?page_group_type=categories&page_group_code=" +
+      "/get-content?page_group_type=categories&page_group_code=" +
       groupCode +
       "&table_name=" +
       tableName +
@@ -333,10 +333,10 @@ const Home = () => {
     } else {
       if (pageCurrent === 0) {
         configureImageSrc(result);
-        setGames(result.data);
+        setGames(result.content);
       } else {
         configureImageSrc(result);
-        setGames([...games, ...result.data]);
+        setGames([...games, ...result.content]);
       }
       pageCurrent += 1;
     }
@@ -344,7 +344,7 @@ const Home = () => {
   };
 
   const configureImageSrc = (result) => {
-    (result.data || []).forEach((element) => {
+    (result.content || []).forEach((element) => {
       let imageDataSrc = element.image_url;
       if (element.image_local !== null) {
         imageDataSrc = contextData.cdnUrl + element.image_local;
