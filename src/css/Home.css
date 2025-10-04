@@ -1220,6 +1220,8 @@
 }
 
 .logo_logo {
+    width: 134px;
+    height: 30px;
     object-fit: contain
 }
 
@@ -2424,8 +2426,9 @@
 
 .header_headerLeftContent img {
     padding-top: 4px;
-    width: 118px;
-    height: 48px;
+    width: 134px;
+    height: 30px;
+    object-fit: contain;
 }
 
 .header_headerLinks {
