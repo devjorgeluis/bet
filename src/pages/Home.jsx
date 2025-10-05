@@ -112,7 +112,7 @@ const Home = () => {
 
   useEffect(() => {
     updateNavLinks();
-  }, [selectedPage, isSlotsOnly]);
+  }, [isSlotsOnly]);
 
   const getStatus = () => {
     callApi(contextData, "GET", "/get-status", callbackGetStatus, null);
@@ -210,7 +210,6 @@ const Home = () => {
       setTopGames(result.top_slot);
       setTopLiveCasino(result.top_livecasino);
       contextData.slots_only = result && result.slots_only;
-      updateNavLinks();
     }
   };
 
