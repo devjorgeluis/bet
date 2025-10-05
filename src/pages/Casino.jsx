@@ -97,7 +97,7 @@ const Casino = () => {
 
   useEffect(() => {
     updateNavLinks();
-  }, [selectedPage, isSlotsOnly]);
+  }, [isSlotsOnly]);
 
   const updateNavLinks = () => {
     if (isSlotsOnly === "false") {
