@@ -12,8 +12,8 @@ const CategoryButton = (props) => {
           <img
             alt={props.name}
             loading="lazy"
-            width="20"
-            height="20"
+            width="40"
+            height="40"
             decoding="async"
             src={props.icon}
             onError={(e) => {
