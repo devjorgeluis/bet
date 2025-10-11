@@ -637,22 +637,36 @@ const Home = () => {
                   </div>
                 </div>
               }
-
               <section className="promo-section_section">
-                {promos.map((promo, index) => (
-                  <div className="promo-section_itemWrapper" key={index}>
-                    <div className="promo-section_imageWrapper">
-                      <div className="promo-section_imageInner">
-                        <img loading="lazy" width={360} height={274} src={promo.image} />
+                {
+                  isSlotsOnly === "false" ? promos.map((promo, index) => (
+                    <div className="promo-section_itemWrapper" key={index}>
+                      <div className="promo-section_imageWrapper">
+                        <div className="promo-section_imageInner">
+                          <img loading="lazy" width={360} height={274} src={promo.image} />
+                        </div>
+                      </div>
+                      <div className="promo-section_buttonWrapper">
+                        <a href={promo.link}>
+                          <button className="button_button button_zeusPrimary button_sm">{promo.name}</button>
+                        </a>
                       </div>
                     </div>
-                    <div className="promo-section_buttonWrapper">
-                      <a href={promo.link}>
-                        <button className="button_button button_zeusPrimary button_sm">{promo.name}</button>
-                      </a>
+                  )) : <>
+                    <div className="promo-section_itemWrapper">
+                      <div className="promo-section_imageWrapper">
+                        <div className="promo-section_imageInner">
+                          <img loading="lazy" width={360} height={274} src={ImgPromoCasino} />
+                        </div>
+                      </div>
+                      <div className="promo-section_buttonWrapper">
+                        <a href="/casino">
+                          <button className="button_button button_zeusPrimary button_sm">Casino</button>
+                        </a>
+                      </div>
                     </div>
-                  </div>
-                ))}
+                  </>
+                }
               </section>
             </>
           )}
