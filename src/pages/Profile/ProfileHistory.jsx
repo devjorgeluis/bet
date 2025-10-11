@@ -423,8 +423,8 @@ const ProfileHistory = () => {
                                                 <tr className="table_tableRow" key={"txn" + index}>
                                                     <td className="table_tableCell" align="left">{formatDateDisplay(txn.created_at)}</td>
                                                     <td className="table_tableCell text-capitalize" align="left">{formatOperation(txn.type)}</td>
-                                                    <td className="table_tableCell" align="left">{formatBalance(txn.from_new_balance)}</td>
-                                                    <td className="table_tableCell" align="left">{formatBalance(txn.from_current_balance)}</td>
+                                                    <td className="table_tableCell" align="left">{formatBalance(txn.to_current_balance)}</td>
+                                                    <td className="table_tableCell" align="left">{formatBalance(txn.to_new_balance)}</td>
                                                     <td className="table_tableCell" align="left">{formatBalance(txn.amount)}</td>
                                                 </tr>
                                             ))}
