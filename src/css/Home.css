@@ -1220,6 +1220,8 @@
 }
 
 .logo_logo {
+    width: 172px;
+    height: 30px;
     object-fit: contain
 }
 
@@ -2423,9 +2425,9 @@
 }
 
 .header_headerLeftContent img {
-    padding-top: 4px;
-    width: 118px;
-    height: 48px;
+    width: 172px;
+    height: 30px;
+    object-fit: contain;
 }
 
 .header_headerLinks {
@@ -3454,10 +3456,10 @@
     padding: 0;
     font-size: 1rem;
     border: 1px solid #03a84e;
-    border-color: #eccf45 !important;
+    border-color: #494999 !important;
     line-height: 1.5rem;
     text-decoration: none;
-    background-color: #eccf45 !important;
+    background-color: #494999 !important;
     color: #fff;
 }
 
