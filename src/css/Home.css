@@ -2246,6 +2246,7 @@
     transition: all .2s linear;
     color: #cecfec;
     margin-right: 15px;
+    margin-left: 10px;
     max-width: 200px;
     white-space: nowrap;
     overflow: hidden;
