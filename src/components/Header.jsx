@@ -4,8 +4,9 @@ import UserMenu from "../components/UserMenu";
 import ImgLogo from "/src/assets/img/logo.png";
 import IconProfile from "/src/assets/svg/profile.svg";
 import IconHamburger from "/src/assets/svg/hamburger.svg";
+import ImgSupport from "/src/assets/svg/support-black.svg";
 
-const Header = ({ isLogin, userBalance, handleLoginClick, handleLogoutClick, handleChangePasswordClick, fragmentNavLinksTop, isSlotsOnly }) => {
+const Header = ({ isLogin, userBalance, supportParent, handleLoginClick, handleLogoutClick, handleChangePasswordClick, fragmentNavLinksTop, isSlotsOnly, openSupportModal }) => {
     const navigate = useNavigate();
     const [showUserMenu, setShowUserMenu] = useState(false);
     const openMenu = () => {
@@ -37,6 +38,9 @@ const Header = ({ isLogin, userBalance, handleLoginClick, handleLogoutClick, han
                     <div className="header-right_headerRight">
                         {isLogin ? (
                             <>
+                                <button className="button-support" onClick={() => { openSupportModal(false); }}>
+                                    <img src={ImgSupport} />
+                                </button>
                                 <div className="header-right_headerBalance">{userBalance ? parseFloat(userBalance).toFixed(2) + " $" : ""}</div>
                                 <div className="header-right_headerRightUser" onClick={() => openMenu()}>
                                     <img src={IconProfile} width={20} height={20} />
@@ -51,6 +55,9 @@ const Header = ({ isLogin, userBalance, handleLoginClick, handleLogoutClick, han
                             <div className="header-right_headerRight">
                                 <div className="header-right_headerBalance"></div>
                                 <div className="header-right_guestRightMenu">
+                                    <button className="button-support" onClick={() => { openSupportModal(false); }}>
+                                        <img src={ImgSupport} />
+                                    </button>
                                     <button className="button_button button_zeusPrimary button_xs" onClick={() => handleLoginClick()}>Acceso</button>
                                     <button className="button_button button_ghost button_md header-right_burgerButton hidden md:flex" onClick={() => openMenu()}>
                                         <img src={IconHamburger} />
@@ -66,6 +73,8 @@ const Header = ({ isLogin, userBalance, handleLoginClick, handleLogoutClick, han
                 handleLogoutClick={() => {handleLogoutClick(); onClose();}} 
                 onClose={onClose}
                 isSlotsOnly={isSlotsOnly}
+                supportParent={supportParent}
+                openSupportModal={openSupportModal}
             />}
         </>
     );
