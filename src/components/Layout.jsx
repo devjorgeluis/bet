@@ -10,6 +10,7 @@ import NavLinkHeader from "../components/NavLinkHeader";
 import LoginModal from "./LoginModal";
 import LogoutConfirmModal from "./LogoutConfirmModal";
 import ChangePasswordModal from "./ChangePasswordModal";
+import SupportModal from "./SupportModal";
 import { NavigationContext } from "./NavigationContext";
 import FullDivLoading from "./FullDivLoading";
 
@@ -19,9 +20,15 @@ const Layout = () => {
     const [isLogin, setIsLogin] = useState(contextData.session !== null);
     const [isMobile, setIsMobile] = useState(false);
     const [userBalance, setUserBalance] = useState("");
+    const [supportWhatsApp, setSupportWhatsApp] = useState("");
+    const [supportTelegram, setSupportTelegram] = useState("");
+    const [supportEmail, setSupportEmail] = useState("");
+    const [supportParent, setSupportParent] = useState("");
     const [showLoginModal, setShowLoginModal] = useState(false);
     const [showLogoutModal, setShowLogoutModal] = useState(false);
     const [showChangePasswordModal, setShowChangePasswordModal] = useState(false);
+    const [showSupportModal, setShowSupportModal] = useState(false);
+    const [supportParentOnly, setSupportParentOnly] = useState(false);
     const [fragmentNavLinksTop, setFragmentNavLinksTop] = useState(<></>);
     const [isSlotsOnly, setIsSlotsOnly] = useState("");
     const [showFullDivLoading, setShowFullDivLoading] = useState(false);
@@ -35,6 +42,11 @@ const Layout = () => {
             setIsLogin(true);
             if (contextData.session.user && contextData.session.user.balance) {
                 setUserBalance(contextData.session.user.balance);
+
+                setSupportWhatsApp(contextData.session.support_whatsapp || "");
+                setSupportTelegram(contextData.session.support_telegram || "");
+                setSupportEmail(contextData.session.support_email || "");
+                setSupportParent(contextData.session.support_parent || "");
             }
 
             refreshBalance();
@@ -128,6 +140,11 @@ const Layout = () => {
                 </>
             );
         }
+
+        setSupportWhatsApp(result && result.support_whatsapp ? result.support_whatsapp : "");
+        setSupportTelegram(result && result.support_telegram ? result.support_telegram : "");
+        setSupportEmail(result && result.support_email ? result.support_email : "");
+        setSupportParent(result && result.support_parent ? result.support_parent : "");
     };
 
     const handleLoginClick = () => {
@@ -159,13 +176,27 @@ const Layout = () => {
         }, null);
     };
 
+    const openSupportModal = (parentOnly = false) => {
+        setSupportParentOnly(Boolean(parentOnly));
+        setShowSupportModal(true);
+    };
+
+    const closeSupportModal = () => {
+        setShowSupportModal(false);
+        setSupportParentOnly(false);
+    };
+
     const layoutContextValue = {
         isLogin,
         userBalance,
+        supportWhatsApp,
+        supportTelegram,
+        supportEmail,
         handleLoginClick,
         handleLogoutClick,
         handleChangePasswordClick,
-        refreshBalance
+        refreshBalance,
+        openSupportModal
     };
 
     return (
@@ -202,6 +233,8 @@ const Layout = () => {
                             handleChangePasswordClick={handleChangePasswordClick}
                             fragmentNavLinksTop={fragmentNavLinksTop}
                             isSlotsOnly={isSlotsOnly}
+                            supportParent={supportParent}
+                            openSupportModal={openSupportModal}
                         />
                         <main className="app__main">
                             <Outlet context={{ isSlotsOnly }} />
@@ -211,6 +244,16 @@ const Layout = () => {
                                 !isMobile ? <Footer isSlotsOnly={isSlotsOnly} isSportsPage={isSportsPage} /> : <></>
                         }
                     </>
+
+                    <SupportModal
+                        isOpen={showSupportModal}
+                        onClose={closeSupportModal}
+                        supportWhatsApp={supportWhatsApp}
+                        supportTelegram={supportTelegram}
+                        supportEmail={supportEmail}
+                        supportParentOnly={supportParentOnly}
+                        supportParent={supportParent}
+                    />
                 </>
             </NavigationContext.Provider>
         </LayoutContext.Provider>
