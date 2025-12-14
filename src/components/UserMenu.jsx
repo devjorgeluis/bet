@@ -5,9 +5,10 @@ import IconProfileCircle from "/src/assets/svg/profile-circle.svg";
 import IconHistory from "/src/assets/svg/history.svg";
 import IconNotification from "/src/assets/svg/notification.svg";
 import IconPassword from "/src/assets/svg/password.svg";
+import IconCall from "/src/assets/svg/call.svg";
 import IconLogout from "/src/assets/svg/logout.svg";
 
-const UserMenu = ({ handleChangePasswordClick, handleLogoutClick, onClose, isSlotsOnly }) => {
+const UserMenu = ({ handleChangePasswordClick, handleLogoutClick, onClose, isSlotsOnly, supportParent, openSupportModal }) => {
     const navigate = useNavigate();
     const { contextData } = useContext(AppContext);
 
@@ -32,17 +33,20 @@ const UserMenu = ({ handleChangePasswordClick, handleLogoutClick, onClose, isSlo
                                 <img className="mobile-menu-links_icon" src={IconHistory} />
                                 <span className="mobile-menu-links_linkText">Historial</span>
                             </a>
-                            <a className="mobile-menu-links_link" onClick={() => {navigate("/profile/notification"); onClose();}}>
+                            {
+                                supportParent && <a className="mobile-menu-links_link" onClick={() => { openSupportModal(true); onClose(); }}>
+                                    <img className="mobile-menu-links_icon" src={IconCall} style={{ width: 24 }} />
+                                    <span className="mobile-menu-links_linkText">Contactá a Tu Cajero</span>
+                                </a>
+                            }
+                            {/* <a className="mobile-menu-links_link" onClick={() => {navigate("/profile/notification"); onClose();}}>
                                 <img className="mobile-menu-links_icon" src={IconNotification} />
                                 <span className="mobile-menu-links_linkText">Notificaciones</span>
-                                {/* <div className="notifications-counter_notificationsCounter notifications-counter_md">
-                                    <span className="notifications-counter_notificationCounter">1</span>
-                                </div> */}
                             </a>
                             <button className="button_button button_ghost button_md mobile-menu-links_link" onClick={handleChangePasswordClick}>
                                 <img className="mobile-menu-links_icon" src={IconPassword} />
                                 <span className="mobile-menu-links_linkText">Cambiar contraseña</span>
-                            </button>
+                            </button> */}
                             <button className="button_button button_ghost button_md mobile-menu-links_link" onClick={handleLogoutClick}>
                                 <img className="mobile-menu-links_icon" src={IconLogout} />
                                 <span className="mobile-menu-links_linkText">Cerrar sesión</span>
