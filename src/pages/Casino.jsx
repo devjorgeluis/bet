@@ -81,6 +81,37 @@ const Casino = () => {
   }, []);
 
   useEffect(() => {
+    const handleVisibilityChange = () => {
+      if (document.visibilityState === 'visible') {
+        const currentPath = window.location.pathname;
+        
+        if (currentPath === '/casino') {
+          selectedGameId = null;
+          selectedGameType = null;
+          selectedGameLauncher = null;
+          selectedGameName = null;
+          setGameUrl("");
+          setShouldShowGameModal(false);
+          setActiveCategory({});
+          
+          setShowFullDivLoading(true);
+          
+          setSelectedPage("casino");
+          getPage("casino");
+          
+          window.scrollTo(0, 0);
+        }
+      }
+    };
+
+    document.addEventListener('visibilitychange', handleVisibilityChange);
+    
+    return () => {
+      document.removeEventListener('visibilitychange', handleVisibilityChange);
+    };
+  }, []);
+
+  useEffect(() => {
     selectedGameId = null;
     selectedGameType = null;
     selectedGameLauncher = null;
@@ -214,6 +245,8 @@ const Casino = () => {
 
       pageCurrent = 0;
     }
+
+    setShowFullDivLoading(false);
     setIsLoadingGames(false);
   };
 
