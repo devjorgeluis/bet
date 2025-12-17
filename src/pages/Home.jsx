@@ -78,6 +78,39 @@ const Home = () => {
   ]
 
   useEffect(() => {
+    const handleVisibilityChange = () => {
+      if (document.visibilityState === 'visible') {
+        const currentPath = window.location.pathname;
+        
+        if (currentPath === '/' || currentPath === '') {          
+          selectedGameId = null;
+          selectedGameType = null;
+          selectedGameLauncher = null;
+          selectedGameName = null;
+          selectedGameImg = null;
+          setGameUrl("");
+          setShouldShowGameModal(false);
+          setActiveCategory({});
+          
+          setShowFullDivLoading(true);
+          
+          setSelectedPage("home");
+          getPage("home");
+          getStatus();
+          
+          window.scrollTo(0, 0);
+        }
+      }
+    };
+
+    document.addEventListener('visibilitychange', handleVisibilityChange);
+    
+    return () => {
+      document.removeEventListener('visibilitychange', handleVisibilityChange);
+    };
+  }, []);
+
+  useEffect(() => {
     const checkIsMobile = () => {
       return window.innerWidth <= 767;
     };
@@ -246,6 +279,8 @@ const Home = () => {
       }
       pageCurrent = 0;
     }
+
+    setShowFullDivLoading(false);
     setIsLoadingGames(false);
   };
 
