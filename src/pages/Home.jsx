@@ -279,6 +279,8 @@ const Home = () => {
       }
       pageCurrent = 0;
     }
+
+    setShowFullDivLoading(false);
     setIsLoadingGames(false);
   };
 
