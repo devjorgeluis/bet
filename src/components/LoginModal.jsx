@@ -2,7 +2,7 @@ import { useContext, useState, useEffect } from "react";
 import { AppContext } from "../AppContext";
 import { callApi } from "../utils/Utils";
 import CustomAlert from "../components/CustomAlert";
-import ImgLogo from "/src/assets/img/logo.webp";
+import ImgLogo from "/src/assets/img/logo.png";
 import IconClose from "/src/assets/svg/close.svg";
 import IconEye from "/src/assets/svg/eye.svg";
 import IconEyeSlash from "/src/assets/svg/eye-slash.svg";

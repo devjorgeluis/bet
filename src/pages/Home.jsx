@@ -89,7 +89,6 @@ const Home = () => {
           selectedGameType = null;
           selectedGameLauncher = null;
           selectedGameName = null;
-          selectedGameImg = null;
           setGameUrl("");
           setShouldShowGameModal(false);
           setActiveCategory({});

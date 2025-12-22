@@ -1,7 +1,7 @@
 import { useState } from "react";
 import { useNavigate } from "react-router-dom";
 import UserMenu from "../components/UserMenu";
-import ImgLogo from "/src/assets/img/logo.webp";
+import ImgLogo from "/src/assets/img/logo.png";
 import IconProfile from "/src/assets/svg/profile.svg";
 import IconHamburger from "/src/assets/svg/hamburger.svg";
 import ImgSupport from "/src/assets/svg/support-black.svg";
