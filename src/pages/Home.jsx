@@ -16,9 +16,11 @@ import SearchSelect from "../components/SearchSelect";
 import LoginModal from "../components/LoginModal";
 import CustomAlert from "../components/CustomAlert";
 import "animate.css";
+import ImgBanner0 from "/src/assets/img/christmas.avif";
 import ImgBanner1 from "/src/assets/img/slots.avif";
 import ImgBanner2 from "/src/assets/img/live-casino.avif";
 import ImgBanner3 from "/src/assets/img/sport.avif";
+import ImgMobileBanner0 from "/src/assets/img/mobile-christmas.avif";
 import ImgMobileBanner1 from "/src/assets/img/mobile-slots.avif";
 import ImgMobileBanner2 from "/src/assets/img/mobile-live-casino.avif";
 import ImgMobileBanner3 from "/src/assets/img/mobile-sport.avif";
@@ -69,11 +71,11 @@ const Home = () => {
   const searchRef = useRef(null);
   const { isSlotsOnly } = useOutletContext();
 
-  let imageSlideshow = isMobile ? [ImgMobileBanner1, ImgMobileBanner2, ImgMobileBanner3] : [ImgBanner1, ImgBanner2, ImgBanner3];
+  let imageSlideshow = isMobile ? [ImgMobileBanner0, ImgMobileBanner1, ImgMobileBanner2, ImgMobileBanner3] : [ImgBanner0, ImgBanner1, ImgBanner2, ImgBanner3];
 
   const promos = [
     { name: "Casino", link: "/casino", image: ImgPromoCasino },
-    { name: "Mejor Casino en Vivo", link: "/live-casino", image: ImgPromoLiveCasino },
+    { name: "Casino en Vivo", link: "/live-casino", image: ImgPromoLiveCasino },
     { name: "Deportes", link: "/sports", image: ImgPromoSport }
   ]
 
@@ -637,7 +639,7 @@ const Home = () => {
                 isSlotsOnly === "false" && <div className="live-casino">
                   <div className="games-block-title_gamesBlockTitle">
                     <div className="games-block-title_gamesBlockTitleSeparator games-block-title_gamesBlockTitleLeft"></div>
-                    <p className="games-block-title_gamesBlockTitleText">Mejor Casino en Vivo</p>
+                    <p className="games-block-title_gamesBlockTitleText">Casino en Vivo</p>
                     <div className="games-block-title_gamesBlockTitleSeparator games-block-title_gamesBlockTitleRight"></div>
                   </div>
                   <div className="games-cards-suspensed_gameCardWrapper">

@@ -2,7 +2,7 @@
     --darkui-background: rgba(0, 0, 50, 1);
     --darkui-text-regular: rgba(255, 255, 255, 1);
     --darkui-text-regular-2: rgba(0, 0, 0, 1);
-    --darkui-accent: #f2ce00;
+    --darkui-accent: #DA4168;
     --darkui-background-secondary: rgba(26, 26, 71, 1);
     --darkui-fields: rgba(255, 255, 255, 0.1);
     --darkui-fields-2: rgba(255, 255, 255, 0.5);
@@ -17,9 +17,9 @@
     --accent-dark-button-text: rgba(17, 21, 34, 1);
     --modal-background: rgba(41, 44, 54, 1);
     --footer-background: rgba(0, 0, 0, 1);
-    --footer-links-title: #f2ce00;
+    --footer-links-title: #DA4168;
 
-    --user-menu-icon-color: #ffc745;
+    --user-menu-icon-color: #DA4168;
 
     --footer-warning-background: rgba(0, 0, 50, 1);
 

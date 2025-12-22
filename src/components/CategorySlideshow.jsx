@@ -71,7 +71,7 @@ const CategorySlideshow = (props) => {
         observeParents={true}
         breakpoints={{
           320: {
-            slidesPerView: 4
+            slidesPerView: 3
           },
           576: {
             slidesPerView: 6

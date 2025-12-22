@@ -1,5 +1,5 @@
 import React, { useState } from "react";
-import ImgLogo from "/src/assets/img/logo.png";
+import ImgLogo from "/src/assets/img/logo.webp";
 import ImgEn from "/src/assets/img/en.png";
 import ImgEs from "/src/assets/img/es.png";
 import ImgBet from "/src/assets/img/bet-responsibility.png";
