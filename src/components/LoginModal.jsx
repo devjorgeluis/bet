@@ -25,6 +25,7 @@ const LoginModal = ({ isOpen, onClose, onLoginSuccess }) => {
             let body = {
                 username: username,
                 password: password,
+                site_label: "celuapuestas",
             };
             callApi(
                 contextData,
@@ -48,6 +49,8 @@ const LoginModal = ({ isOpen, onClose, onLoginSuccess }) => {
             setTimeout(() => {
                 onClose();
             }, 1000);
+        } else if (result.status === "country") {
+            setMessageCustomAlert(["error", result.message]);
         } else {
             setMessageCustomAlert(["error", "Nombre de usuario o contraseña no válidos"]);
         }
